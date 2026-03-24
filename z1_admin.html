@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Admin - Inscrições</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Firebase SDK Compat -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: #111424;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        #loginScreen, #dashboardScreen {
+            background: #1e2235;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            width: 100%;
+            max-width: 800px;
+        }
+
+        #dashboardScreen { display: none; }
+
+        h2 { margin-bottom: 20px; color: #4caf50; text-align: center; }
+        
+        input {
+            width: 100%; padding: 12px; margin-bottom: 15px;
+            background: #2a2e45; border: 1px solid #3b4060;
+            color: white; border-radius: 8px; font-size: 16px;
+        }
+        
+        button {
+            width: 100%; padding: 15px;
+            background: #4caf50; border: none; color: white;
+            font-size: 16px; font-weight: bold; border-radius: 8px;
+            cursor: pointer; transition: 0.3s;
+        }
+        button:hover { background: #45a049; }
+
+        .error { color: #ff6b35; text-align: center; margin-bottom: 15px; display: none; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #3b4060; }
+        th { background: #2a2e45; color: #4caf50; }
+        tr:hover { background: #2a2e45; }
+        
+        .topo { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .btn-sair { width: auto; padding: 8px 20px; background: #ff6b35; }
+    </style>
+</head>
+
+<body>
+
+    <!-- TELA DE LOGIN -->
+    <div id="loginScreen">
+        <h2>Área Restrita 🔒</h2>
+        <div id="loginError" class="error">Usuário ou senha incorretos!</div>
+        <input type="text" id="user" placeholder="Usuário">
+        <input type="password" id="pass" placeholder="Senha">
+        <button onclick="fazerLogin()">Entrar no Painel</button>
+    </div>
+
+    <!-- TELA DE DADOS -->
+    <div id="dashboardScreen">
+        <div class="topo">
+            <h2>Gestão de Inscrições 🎸</h2>
+            <button class="btn-sair" onclick="sair()">Sair</button>
+        </div>
+        
+        <table id="tabelaLeads">
+            <thead>
+                <tr>
+                    <th>Data da Inscrição</th>
+                    <th>Idade</th>
+                    <th>Nível de Conhecimento</th>
+                </tr>
+            </thead>
+            <tbody id="listaCorpo">
+                <!-- Dados entrarão aqui -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // CONFIGURAÇÃO DO FIREBASE
+        const firebaseConfig = {
+            apiKey: "AIzaSyBYHovuf2hx9gEoqjczILWMlaw7iLmnb24",
+            authDomain: "jaca-5083d.firebaseapp.com",
+            projectId: "jaca-5083d",
+            storageBucket: "jaca-5083d.firebasestorage.app",
+            messagingSenderId: "155066095982",
+            appId: "1:155066095982:web:7972eac6edc9da7651097f"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const auth = firebase.auth();
+
+        // ELEMENTOS DA TELA
+        const loginScreen = document.getElementById('loginScreen');
+        const dashboardScreen = document.getElementById('dashboardScreen');
+        const listaCorpo = document.getElementById('listaCorpo');
+        const loginError = document.getElementById('loginError');
+
+        // FUNÇÃO DE LOGIN
+        async function fazerLogin() {
+            // Transformamos o user "azdimin" em "azdimin@admin.com" apenas para validar no Firebase Auth
+            const user = document.getElementById('user').value.trim() + "@admin.com";
+            const pass = document.getElementById('pass').value.trim();
+
+            try {
+                loginError.style.display = 'none';
+                await auth.signInWithEmailAndPassword(user, pass);
+                mostrarPainel();
+                carregarDados();
+            } catch (error) {
+                loginError.style.display = 'block';
+                console.error("Erro", error);
+            }
+        }
+
+        // MOSTRAR TELA DE MANEIRA SEGURA
+        function mostrarPainel() {
+            loginScreen.style.display = 'none';
+            dashboardScreen.style.display = 'block';
+        }
+
+        // CARREGAR DADOS DO BANCO
+        async function carregarDados() {
+            try {
+                listaCorpo.innerHTML = '<tr><td colspan="3" style="text-align:center;">Carregando dados...</td></tr>';
+                
+                // Pega do mais recente pro mais antigo
+                const snapshot = await db.collection('inscricoes_aula_gratuita')
+                                         .orderBy('data_cadastro', 'desc')
+                                         .get();
+                
+                listaCorpo.innerHTML = ''; // Limpa a tabela
+                
+                if(snapshot.empty) {
+                    listaCorpo.innerHTML = '<tr><td colspan="3" style="text-align:center;">Nenhuma inscrição ainda.</td></tr>';
+                    return;
+                }
+
+                snapshot.forEach(doc => {
+                    const lead = doc.data();
+                    const dataFormatada = lead.data_cadastro ? lead.data_cadastro.toDate().toLocaleString('pt-BR') : 'Data Indisponível';
+                    
+                    listaCorpo.innerHTML += `
+                        <tr>
+                            <td>${dataFormatada}</td>
+                            <td>${lead.idade} anos</td>
+                            <td style="text-transform: capitalize;">${lead.nivel}</td>
+                        </tr>
+                    `;
+                });
+            } catch (error) {
+                console.error(error);
+                listaCorpo.innerHTML = '<tr><td colspan="3" style="text-align:center; color:#ff6b35;">Siga os passos e libere a autenticação no Firebase Rules!</td></tr>';
+            }
+        }
+
+        // DESLOGAR
+        function sair() {
+            auth.signOut().then(() => {
+                loginScreen.style.display = 'block';
+                dashboardScreen.style.display = 'none';
+                document.getElementById('user').value = '';
+                document.getElementById('pass').value = '';
+            });
+        }
+
+        // MANTER LOGADO QUANDO RECARREGAR PÁGINA
+        auth.onAuthStateChanged(user => {
+            if (user && user.email === 'azdimin@admin.com') {
+                mostrarPainel();
+                carregarDados();
+            }
+        });
+    </script>
+</body>
+</html>
