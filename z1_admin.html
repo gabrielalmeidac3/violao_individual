@@ -116,6 +116,9 @@
         const listaCorpo = document.getElementById('listaCorpo');
         const loginError = document.getElementById('loginError');
 
+        // FORÇAR PERSISTÊNCIA MÁXIMA PARA NÃO DESLOGAR SOZINHO (mesmo fechando o navegador)
+        auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(err => console.error(err));
+
         // FUNÇÃO DE LOGIN
         async function fazerLogin() {
             // Transformamos o user "azdimin" em "azdimin@admin.com" apenas para validar no Firebase Auth
@@ -186,7 +189,7 @@
 
         // MANTER LOGADO QUANDO RECARREGAR PÁGINA
         auth.onAuthStateChanged(user => {
-            if (user && user.email === 'azdimin@admin.com') {
+            if (user && user.email) {
                 mostrarPainel();
                 carregarDados();
             }
