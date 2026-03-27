@@ -93,6 +93,29 @@
             font-style: italic;
         }
 
+        .exclusive-badge {
+            background: rgba(201, 168, 76, 0.15);
+            color: #ffb74d;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            border: 1px solid rgba(201, 168, 76, 0.3);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 10px rgba(255, 183, 77, 0.1);
+        }
+
+        .exclusive-badge svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+            flex-shrink: 0;
+        }
+
         .image-glow-wrapper {
             position: relative;
             display: inline-flex;
@@ -228,7 +251,9 @@
 
         input[type="number"] {
             -moz-appearance: textfield;
-        }        /* Custom Select Design */
+        }
+
+        /* Custom Select Design */
         .custom-select-wrapper {
             position: relative;
             user-select: none;
@@ -331,11 +356,11 @@
             color: #e3f2fd;
             transition: all 0.2s ease;
             text-align: left;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             cursor: pointer;
             line-height: 1.3;
         }
-        
+
         .custom-option:last-child {
             border-bottom: none;
         }
@@ -619,9 +644,13 @@
             </div>
 
             <div style="margin-bottom: 30px;">
-                <span
-                    style="background: rgba(201, 168, 76, 0.15); color: #ffb74d; padding: 8px 20px; border-radius: 30px; font-weight: 600; border: 1px solid rgba(201, 168, 76, 0.3); font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; display: inline-block; box-shadow: 0 2px 10px rgba(255, 183, 77, 0.1);">
-                    â­ Exclusivo para 40+
+                <span class="exclusive-badge">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path
+                            d="M12 2.5l2.94 5.96 6.58.96-4.76 4.64 1.12 6.55L12 17.52 6.12 20.61l1.12-6.55L2.48 9.42l6.58-.96L12 2.5z">
+                        </path>
+                    </svg>
+                    <span>Exclusivo para 40+</span>
                 </span>
             </div>
 
@@ -681,8 +710,10 @@
                             </div>
                             <div class="custom-options">
                                 <span class="custom-option" data-value="zero">Começando do zero</span>
-                                <span class="custom-option" data-value="iniciante">Iniciante (Sei o básico mas não toco músicas inteiras ainda)</span>
-                                <span class="custom-option" data-value="intermediario">Intermediário (Toco algumas músicas)</span>
+                                <span class="custom-option" data-value="iniciante">Iniciante (Sei o básico mas não toco
+                                    músicas inteiras ainda)</span>
+                                <span class="custom-option" data-value="intermediario">Intermediário (Toco algumas
+                                    músicas)</span>
                                 <span class="custom-option" data-value="avancado">Avançado (Toco muito bem)</span>
                             </div>
                         </div>
@@ -753,7 +784,7 @@
         // Verifica se tem alguma chave configurada (não está vazio)
         if (firebaseConfig.apiKey && firebaseConfig.apiKey !== "COLOCAR_AQUI") {
             firebase.initializeApp(firebaseConfig);
-            
+
             // --- FIREBASE APP CHECK ---
             // Proteção contra bots e requisições via F12
             // O App Check será imposto via Firebase Console
@@ -774,7 +805,7 @@
             if (calendlyLoader) calendlyLoader.style.display = 'none';
         }
 
-        // Escuta o evento específico que o Calendly dispara APí“S finalizar o próprio carregamento nativo
+        // Escuta o evento específico que o Calendly dispara após finalizar o próprio carregamento nativo
         window.addEventListener('message', function (e) {
             if (e.data && e.data.event && e.data.event === 'calendly.event_type_viewed') {
                 showCalendly();
@@ -1033,21 +1064,21 @@
 
             if (!customSelect) return;
 
-            customSelect.addEventListener('click', function(e) {
+            customSelect.addEventListener('click', function (e) {
                 this.classList.toggle('open');
             });
 
             options.forEach(option => {
-                option.addEventListener('click', function(e) {
+                option.addEventListener('click', function (e) {
                     e.stopPropagation();
                     hiddenInput.value = this.dataset.value;
                     trigger.querySelector('span').textContent = this.textContent;
                     customSelect.classList.add('selected');
                     customSelect.classList.remove('open');
-                    
+
                     options.forEach(opt => opt.classList.remove('selected'));
                     this.classList.add('selected');
-                    
+
                     // Limpar mensagem de erro ao selecionar, caso visível
                     if (msgValidacao && msgValidacao.classList.contains('is-visible')) {
                         msgValidacao.classList.remove('is-visible');
@@ -1055,7 +1086,7 @@
                 });
             });
 
-            window.addEventListener('click', function(e) {
+            window.addEventListener('click', function (e) {
                 if (!customSelect.contains(e.target)) {
                     customSelect.classList.remove('open');
                 }
