@@ -37,7 +37,8 @@
         .container {
             max-width: 400px;
             margin: 0 auto;
-            min-height: 100vh;
+            flex: 1 0 auto;
+            min-height: 0;
             display: flex;
             flex-direction: column;
             padding: 20px;
@@ -46,11 +47,12 @@
 
         .step {
             display: none;
+            flex: 1 0 auto;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            min-height: calc(100vh - 40px);
+            min-height: 0;
             padding: 20px 0;
             width: 100%;
         }
@@ -246,11 +248,13 @@
         input[type="number"]::-webkit-outer-spin-button,
         input[type="number"]::-webkit-inner-spin-button {
             -webkit-appearance: none;
+            appearance: none;
             margin: 0;
         }
 
         input[type="number"] {
             -moz-appearance: textfield;
+            appearance: textfield;
         }
 
         /* Custom Select Design */
@@ -617,6 +621,175 @@
             background: #4caf50;
         }
 
+        .btn-blue-outline {
+            background: rgba(30, 42, 71, 0.6);
+            color: #e3f2fd;
+            border: 1px solid rgba(176, 196, 222, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            font-size: 16px;
+            padding: 12px 20px;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-blue-outline:hover {
+            background: rgba(44, 62, 102, 0.8);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .video-container {
+            width: 100%;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 10px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            line-height: 0;
+            position: relative;
+            padding-top: 56.25%;
+            height: 0;
+        }
+
+        .video-section-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            align-items: stretch;
+        }
+
+        .video-card {
+            width: 100%;
+            background: rgba(15, 18, 45, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            padding: 18px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.65);
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .video-card-header {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
+            width: 100%;
+        }
+
+        .video-person-name {
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            line-height: 1.4;
+            color: #f1f2f5;
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        .video-person-name::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 45px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 1px;
+        }
+
+        .video-person-city {
+            margin: 0;
+            font-size: 12px;
+            color: #90a4ae;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            align-self: flex-start;
+            width: auto;
+        }
+
+        .video-container video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .video-placeholder {
+            position: absolute;
+            inset: 0;
+            cursor: pointer;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: filter 0.3s ease;
+        }
+
+        .video-placeholder:hover {
+            filter: brightness(1.2);
+        }
+
+        .play-button-overlay {
+            width: 70px;
+            height: 70px;
+            background: rgba(76, 175, 80, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .video-placeholder:hover .play-button-overlay {
+            transform: scale(1.1);
+            background: rgba(76, 175, 80, 0.85);
+            box-shadow: 0 12px 35px rgba(76, 175, 80, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .play-button-overlay svg {
+            width: 30px;
+            height: 30px;
+            fill: white;
+            /* Pequeno ajuste para compensar a percepção ótica do triângulo */
+            margin-left: 3px;
+        }
+
+        .video-card h3 {
+            font-weight: 600;
+        }
+
+        .video-list {
+            display: none;
+            width: 100%;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 25px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .site-footer {
             text-align: center;
             padding: 25px 20px;
@@ -676,6 +849,27 @@
                     <div class="carousel-text" id="carouselText"></div>
                 </div>
                 <div class="carousel-dots" id="carouselDots"></div>
+            </div>
+
+            <!-- Video Section -->
+            <div class="video-section-wrapper">
+                <h2 style="font-size: 1.2em; color: rgb(255, 166, 0); margin-top: 30px; margin-bottom: 15px;">
+                    Depoimentos em
+                    vídeo</h2>
+                <div class="video-card">
+                    <div class="video-card-header">
+                        <p class="video-person-name" id="featuredVideoName">Carregando depoimento...</p>
+                        <p class="video-person-city" id="featuredVideoCity"></p>
+                    </div>
+                    <div class="video-container" id="featuredVideoContainer">
+                        <!-- Carregado via JS para não pesar o site -->
+                    </div>
+                </div>
+                <button class="btn btn-blue-outline" id="btnMoreVideos" onclick="toggleVideoList()">Ver Todos
+                    Depoimentos
+                    em
+                    Vídeo</button>
+                <div id="extraVideos" class="video-list"></div>
             </div>
 
             <p class="call-to-action-title">Pronto para começar?</p>
@@ -812,13 +1006,80 @@
             }
         });
 
+        const stepElements = {
+            step0: document.getElementById('step0'),
+            step1: document.getElementById('step1'),
+            step2: document.getElementById('step2')
+        };
+
+        const historyHashMap = {
+            step0: '',
+            step1: '#agendar',
+            step2: '#calendario'
+        };
+
+        const scrollIndicator = document.getElementById('scrollIndicator');
+
+        const getStepFromHash = (hash) => {
+            if (!hash) return 'step0';
+            const normalized = hash.toLowerCase();
+            return Object.entries(historyHashMap).find(([, value]) => value === normalized)?.[0] || 'step0';
+        };
+
+        const updateHistoryForStep = (stepId, { replace = false } = {}) => {
+            const hash = historyHashMap[stepId] || '';
+            const baseUrl = window.location.pathname + window.location.search;
+            const url = hash ? `${baseUrl}${hash}` : baseUrl;
+            const state = { stepId };
+            if (replace) {
+                history.replaceState(state, '', url);
+            } else {
+                history.pushState(state, '', url);
+            }
+        };
+
+        const setActiveStep = (stepId, { pushState = false, replaceState = false, smoothScroll = true } = {}) => {
+            Object.values(stepElements).forEach(step => {
+                if (step) step.classList.remove('active');
+            });
+
+            const target = stepElements[stepId];
+            if (target) {
+                target.classList.add('active');
+            }
+
+            if (smoothScroll) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            if (scrollIndicator) {
+                if (stepId === 'step0') {
+                    scrollIndicator.classList.remove('hidden');
+                    scrollIndicator.style.display = '';
+                } else {
+                    scrollIndicator.classList.add('hidden');
+                    scrollIndicator.style.display = 'none';
+                }
+            }
+
+            if (pushState || replaceState) {
+                updateHistoryForStep(stepId, { replace: replaceState });
+            }
+        };
+
         function nextStep() {
-            document.getElementById('step0').classList.remove('active');
-            document.getElementById('step1').classList.add('active');
+            setActiveStep('step1', { pushState: true });
         }
+
+        window.addEventListener('popstate', (event) => {
+            const stepId = event.state?.stepId || getStepFromHash(window.location.hash);
+            setActiveStep(stepId, { replaceState: true, smoothScroll: false });
+        });
 
         // Inicia o carregamento silencioso do calendário IMEDIATAMENTE assim que o primeiro link do site abre (Etapa 0)
         window.addEventListener('DOMContentLoaded', function () {
+            const initialStep = getStepFromHash(window.location.hash);
+            setActiveStep(initialStep, { replaceState: true, smoothScroll: false });
             const targetUrl = `https://calendly.com/suportegabriel7/1h?hide_gdpr_banner=1`;
             const calendlyEmbed = document.getElementById('calendlyEmbed');
 
@@ -906,9 +1167,7 @@
                 // O calendário já começou a carregar no background assim que a aba 2 foi aberta
 
                 // Exibe a aba do Calendly na própria página
-                document.getElementById('step1').classList.remove('active');
-                document.getElementById('step2').classList.add('active');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                setActiveStep('step2', { pushState: true });
 
                 // Fallback para o loader do Calendly ao exibir a aba
                 setTimeout(() => {
@@ -948,8 +1207,31 @@
             { name: "Sidnei", city: "São Paulo", img: "images/sidnei.png", text: "Estou superando a mim mesmo com o aprendizado de violão. Graças ao professor Gabriel já consigo tocar bastantes músicas. Gratidão." },
             { name: "Carlos", city: "Paraná", img: "images/carlos.png", text: "Tinha muita dificuldade de acertar a altura da voz e o professor Gabriel está me ajudando, já estou muito feliz com o resultado." },
             { name: "Cleide", city: "Sergipe", img: "images/cleide.png", text: "Comecei praticamente do zero e agora já estou tocando muitas músicas evangélicas." },
-            { name: "Ivo", city: "Paraná", img: "images/ivo.png", text: "Conheci o professor Gabriel no YouTube, é um professor muito paciente, já aprendi a tocar muitas músicas." }
+            { name: "Ivo", city: "Paraná", img: "images/ivo.png", text: "Conheci o professor Gabriel no YouTube, é um professor muito paciente, já aprendi a tocar muitas músicas." },
+            { name: "Amélia", city: "São Paulo", img: "images/amelia.png", text: "Tenho 80 anos e estou aprendendo a tocar com o professor Gabriel, já estou tocando minha segunda música" }
         ];
+
+        const videoTestimonials = [
+            { name: 'Nazir', location: 'Nova Serrana, Minas Gerais', src: 'videos/01 - Nazir.mp4', poster: 'images/nazir.png' },
+            { name: 'Denilson Nogueira', location: 'Teresina, Piauí', src: 'videos/02 - Denilson.mp4', poster: 'images/denilson do piauí.png', pos: 'center 20%' },
+            { name: 'Josineide', location: 'Estado de São Paulo', src: 'videos/03 - Josineide.mp4', poster: 'images/josineide.png' },
+            { name: 'Nina Miranda', location: 'Araxá, Minas Gerais', src: 'videos/04 - Nina Miranda.mp4', poster: 'images/nina de minas gerais.png', pos: 'center 75%', size: '80% auto', bgBlur: true },
+            { name: 'Elita', location: 'Sinop, Mato Grosso', src: 'videos/05 - Elita.mp4', poster: 'images/elita de goiais.png', pos: 'center', size: '80% auto', bgBlur: true },
+            { name: 'Neuda', location: 'Ceará', src: 'videos/06 - Neuda.mp4', poster: 'images/neuda.png' },
+            { name: 'Mariana Arcanja', location: 'João Pessoa, PB', src: 'videos/07 - Mariana.mp4', poster: 'images/mariana de joão pessoa PB.png' },
+            { name: 'Bia Reis', location: 'Almenara, Minas Gerais', src: 'videos/08 - Bia.mp4', poster: 'images/bia reis.png', pos: 'center top', size: '80% auto', bgBlur: true },
+            { name: 'Paulo', location: 'Espírito Santo', src: 'videos/09 - Paulo.mp4', poster: 'images/paulo.png' },
+            { name: 'Daia', location: 'Paraná', src: 'videos/10 - Daia.mp4', poster: 'images/Daia do paraná.png', pos: 'center', size: '80% auto', bgBlur: true },
+            { name: 'Nadir', location: 'Petrópolis, Rio de Janeiro', src: 'videos/11 - Nadir.mp4', poster: 'images/nadir do rio de janeiro.png', pos: 'center 90%', size: '80% auto', bgBlur: true },
+            { name: 'Carlos', location: 'Paraná', src: 'videos/12 - Carlos.mp4', poster: 'images/carlos.png', pos: 'center', size: '80% auto', bgBlur: true },
+            { name: 'Nilza', location: 'Mato Grosso', src: 'videos/13 - Nilza.mp4', poster: 'images/nilza do mato grosso.png', pos: 'center', size: '80% auto', bgBlur: true },
+            { name: 'Ivo Ferreira', location: 'Paraná', src: 'videos/14 - Ivo Ferreira.mp4', poster: 'images/ivo.png', pos: 'center top' },
+            { name: 'Cleide', location: 'Sergipe', src: 'videos/15 - Cleide.mp4', poster: 'images/cleide.png' },
+            { name: 'Antônia', location: 'Ceará', src: 'videos/16 - Depoimento Aluna Antônia_editado.mp4', poster: 'images/antonia.png' },
+            { name: 'Amélia', location: 'São Paulo', src: 'videos/17 - Tocando violão aos 80 anos Depoimento Aluna Amélia_editado.mp4', poster: 'images/amelia.png', pos: 'center', size: '50% auto', bgBlur: true }
+        ];
+
+        // Removido setupFeaturedVideo antigo daqui e movido para baixo de videoTestimonialsExtra
 
         let currentSlide = 0;
         let slideInterval;
@@ -1114,11 +1396,132 @@
             setTimeout(() => observer.observe(btnMarcar), 500);
         }
 
+        const videoTestimonialsExtra = videoTestimonials.slice(1);
+        let extraVideosRendered = false;
+
+        function loadVideo(containerId, src, poster) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            container.innerHTML = `
+                <video controls autoplay style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;">
+                    <source src="${src}" type="video/mp4">
+                </video>
+            `;
+            // Forçamos o play se o autoplay falhar
+            const video = container.querySelector('video');
+            if (video) video.play().catch(() => { });
+        }
+
+        function createLazyVideo(src, poster, id, pos = 'center', size = 'cover', bgBlur = false) {
+            const safeId = id.replace(/[^a-z0-9]/gi, '_');
+            
+            // Camada de fundo (opcional, para efeito de preenchimento)
+            const bgLayer = bgBlur ? `<div style="position: absolute; inset: 0; background-image: url('${poster}'); background-size: cover; background-position: center; opacity: 0.5; filter: blur(8px);"></div>` : '';
+            
+            // Camada principal (foto)
+            const fgLayer = `<div style="position: absolute; inset: 0; background-image: url('${poster}'); background-position: ${pos}; background-size: ${size}; background-repeat: no-repeat;"></div>`;
+            
+            return `
+                <div class="video-placeholder" onclick="loadVideo('vid_wrapper_${safeId}', '${src}', '${poster}')">
+                    ${bgLayer}
+                    ${fgLayer}
+                    <div class="play-button-overlay" style="position: relative; z-index: 2;">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                </div>
+            `;
+        }
+
+        const setupFeaturedVideo = () => {
+            const featured = videoTestimonials[0];
+            const container = document.getElementById('featuredVideoContainer');
+            const nameEl = document.getElementById('featuredVideoName');
+            const cityEl = document.getElementById('featuredVideoCity');
+
+            if (!featured || !container || !nameEl || !cityEl) return;
+
+            nameEl.textContent = featured.name;
+            cityEl.textContent = featured.location;
+
+            const poster = featured.poster || 'images/img.png';
+            const pos = featured.pos || 'center';
+            const size = featured.size || 'cover';
+            const bgBlur = !!featured.bgBlur;
+            container.id = 'vid_wrapper_featured';
+            container.innerHTML = createLazyVideo(featured.src, poster, 'featured', pos, size, bgBlur);
+        };
+
+        setupFeaturedVideo();
+
+        const renderExtraVideos = () => {
+            const list = document.getElementById('extraVideos');
+            if (!list) return;
+            list.innerHTML = '';
+            videoTestimonialsExtra.forEach((clip, index) => {
+                const card = document.createElement('div');
+                card.className = 'video-card';
+
+                const header = document.createElement('div');
+                header.className = 'video-card-header';
+
+                const personName = document.createElement('p');
+                personName.className = 'video-person-name';
+                personName.textContent = clip.name;
+
+                const personCity = document.createElement('p');
+                personCity.className = 'video-person-city';
+                personCity.textContent = clip.location;
+
+                header.append(personName, personCity);
+
+                const videoWrapper = document.createElement('div');
+                videoWrapper.className = 'video-container';
+                const wrapperId = `vid_wrapper_extra_${index}`;
+                videoWrapper.id = wrapperId;
+
+                const poster = clip.poster || 'images/img.png';
+                const pos = clip.pos || 'center';
+                const size = clip.size || 'cover';
+                const bgBlur = !!clip.bgBlur;
+                videoWrapper.innerHTML = createLazyVideo(clip.src, poster, `extra_${index}`, pos, size, bgBlur);
+
+                card.append(header, videoWrapper);
+                list.appendChild(card);
+            });
+            extraVideosRendered = true;
+        };
+
+        function toggleVideoList() {
+            const list = document.getElementById('extraVideos');
+            const btn = document.getElementById('btnMoreVideos');
+            if (!list || !btn) return;
+            if (!extraVideosRendered) {
+                renderExtraVideos();
+            }
+            const isOpen = list.style.display === 'flex';
+            if (isOpen) {
+                list.style.display = 'none';
+                btn.innerText = 'Ver Mais Depoimentos em Vídeo';
+            } else {
+                list.style.display = 'flex';
+                btn.innerText = 'Fechar lista Depoimentos em vídeo';
+                list.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
         const originalNextStep = nextStep;
         nextStep = function () {
             originalNextStep();
             if (scrollInd) scrollInd.style.display = 'none';
         }
+
+        setTimeout(() => {
+            console.log('layout-debug', {
+                documentBodyScrollHeight: document.body.scrollHeight,
+                documentElementScrollHeight: document.documentElement.scrollHeight,
+                windowInnerHeight: window.innerHeight
+            });
+        }, 4000);
     </script>
 </body>
 
