@@ -1056,12 +1056,13 @@
             }
 
             // Resetar estado dos elementos ao entrar na etapa
+            const btnSubmit = document.getElementById('btnSubmit');
+            if (btnSubmit) {
+                btnSubmit.disabled = false;
+                btnSubmit.textContent = 'Continuar';
+            }
+
             if (stepId === 'step1') {
-                const btnSubmit = document.getElementById('btnSubmit');
-                if (btnSubmit) {
-                    btnSubmit.disabled = false;
-                    btnSubmit.textContent = 'Continuar';
-                }
                 const msgValidacao = document.getElementById('mensagemValidacao');
                 if (msgValidacao) {
                     msgValidacao.classList.remove('is-visible');
