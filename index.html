@@ -823,7 +823,14 @@
                             d="M12 2.5l2.94 5.96 6.58.96-4.76 4.64 1.12 6.55L12 17.52 6.12 20.61l1.12-6.55L2.48 9.42l6.58-.96L12 2.5z">
                         </path>
                     </svg>
-                    <span>Exclusivo para 40+</span>
+                    <span style="font-weight: normal;display: inline-block; text-align: center; line-height: 1.5;">
+                        <span style="font-size: 11px; display: block;">
+                            Exclusivo para quem tem
+                        </span>
+                        <span style="font-size: 13px; font-weight: bold; display: block;">
+                            mais de 40 anos
+                        </span>
+                    </span>
                 </span>
             </div>
 
@@ -1046,6 +1053,19 @@
             const target = stepElements[stepId];
             if (target) {
                 target.classList.add('active');
+            }
+
+            // Resetar estado dos elementos ao entrar na etapa
+            if (stepId === 'step1') {
+                const btnSubmit = document.getElementById('btnSubmit');
+                if (btnSubmit) {
+                    btnSubmit.disabled = false;
+                    btnSubmit.textContent = 'Continuar';
+                }
+                const msgValidacao = document.getElementById('mensagemValidacao');
+                if (msgValidacao) {
+                    msgValidacao.classList.remove('is-visible');
+                }
             }
 
             if (smoothScroll) {
@@ -1414,13 +1434,13 @@
 
         function createLazyVideo(src, poster, id, pos = 'center', size = 'cover', bgBlur = false) {
             const safeId = id.replace(/[^a-z0-9]/gi, '_');
-            
+
             // Camada de fundo (opcional, para efeito de preenchimento)
             const bgLayer = bgBlur ? `<div style="position: absolute; inset: 0; background-image: url('${poster}'); background-size: cover; background-position: center; opacity: 0.5; filter: blur(8px);"></div>` : '';
-            
+
             // Camada principal (foto)
             const fgLayer = `<div style="position: absolute; inset: 0; background-image: url('${poster}'); background-position: ${pos}; background-size: ${size}; background-repeat: no-repeat;"></div>`;
-            
+
             return `
                 <div class="video-placeholder" onclick="loadVideo('vid_wrapper_${safeId}', '${src}', '${poster}')">
                     ${bgLayer}
