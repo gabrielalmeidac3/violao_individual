@@ -1259,6 +1259,8 @@
                     });
                     currentLeadId = docRef.id;
                     sessionStorage.setItem('currentLeadId', currentLeadId); // Salva na sessão
+                }
+                
                 // Dispara evento do Pixel
                 if (typeof fbq === 'function') {
                     fbq('trackCustom', 'ind_disse_idade_e_nivel');
