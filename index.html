@@ -6,23 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aula de Violão Gratuita</title>
     <link rel="icon" type="image/png" href="images/0_img.png">
-    
+
     <!-- Meta Pixel Code -->
     <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1261048684985838');
-    fbq('track', 'PageView');
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1261048684985838');
+        fbq('track', 'PageView');
     </script>
     <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1261048684985838&ev=PageView&noscript=1"
-    /></noscript>
+            src="https://www.facebook.com/tr?id=1261048684985838&ev=PageView&noscript=1" /></noscript>
     <!-- End Meta Pixel Code -->
     <!-- Fonts Premium -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -973,14 +975,19 @@
 
             <!-- Calendly Container (injetado dinamicamente já visível) -->
             <div id="calendlyEmbed" style="min-width:320px;height:650px;width:100%; display: block;"></div>
-            
+
             <!-- Link para WhatsApp se não achar horário -->
-            <div style="margin-top: 40px; padding: 25px; background: rgba(100, 181, 246, 0.05); border-radius: 18px; border: 1px solid rgba(100, 181, 246, 0.15); width: 100%; max-width: 380px; margin-left: auto; margin-right: auto;">
-                <h3 style="font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 15px; color: #ffffff;">Não encontrou um horário para você?</h3>
-                <button onclick="setActiveStep('step3', {pushState: true})" class="btn btn-green" 
-                        style="margin-top: 5px; width: 100%; padding: 15px; display: flex; align-items: center; justify-content: center; gap: 10px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.433 5.626 1.433h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            <div
+                style="margin-top: 40px; padding: 25px; background: rgba(100, 181, 246, 0.05); border-radius: 18px; border: 1px solid rgba(100, 181, 246, 0.15); width: 100%; max-width: 380px; margin-left: auto; margin-right: auto;">
+                <h3
+                    style="font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 15px; color: #ffffff;">
+                    Não encontrou um horário para você?</h3>
+                <button onclick="setActiveStep('step3', {pushState: true})" class="btn btn-green"
+                    style="margin-top: 5px; width: 100%; padding: 15px; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24"
+                        fill="currentColor">
+                        <path
+                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.433 5.626 1.433h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
                     </svg>
                     Converse no WhatsApp
                 </button>
@@ -991,30 +998,40 @@
 
         <!-- Etapa 3: Contato WhatsApp -->
         <div class="step" id="step3">
-            <h2 style="font-family: 'Playfair Display', serif; font-size: 26px; margin-bottom: 25px; color: #ffffff; line-height: 1.3; max-width: 340px;">Entre em contato com Gabriel Almeida pelo <span style="color: #4caf50;">WhatsApp</span> para agendar um horário melhor para você</h2>
-            
-            <form id="formWhatsApp" style="max-width: 350px; width: 100%; display: flex; flex-direction: column; text-align: left;">
+            <h2
+                style="font-family: 'Playfair Display', serif; font-size: 26px; margin-bottom: 25px; color: #ffffff; line-height: 1.3; max-width: 340px;">
+                Entre em contato com Gabriel Almeida pelo <span style="color: #4caf50;">WhatsApp</span> para agendar um
+                horário melhor para você</h2>
+
+            <form id="formWhatsApp"
+                style="max-width: 350px; width: 100%; display: flex; flex-direction: column; text-align: left;">
                 <div style="margin-bottom: 15px;">
                     <label for="nomeWhatsapp">Qual o seu nome?</label>
-                    <input type="text" id="nomeWhatsapp" name="nome" required placeholder="Digite seu nome completo" 
-                           maxlength="100" style="font-size: 16px; padding: 15px; background-color: #4a4a4a; border-radius: 8px;">
+                    <input type="text" id="nomeWhatsapp" name="nome" required placeholder="Digite seu nome e sobrenome"
+                        maxlength="100"
+                        style="font-size: 16px; padding: 15px; background-color: #4a4a4a; border-radius: 8px;">
                 </div>
 
                 <div style="margin-bottom: 20px;">
                     <label for="telWhatsapp">Seu WhatsApp com DDD</label>
-                    <input type="tel" id="telWhatsapp" name="whatsapp" required placeholder="(55) 9 5555-5555" 
-                           maxlength="17" style="font-size: 16px; padding: 15px; background-color: #4a4a4a; border-radius: 8px;">
+                    <input type="tel" id="telWhatsapp" name="whatsapp" required placeholder="(55) 9 5555-5555"
+                        maxlength="17"
+                        style="font-size: 16px; padding: 15px; background-color: #4a4a4a; border-radius: 8px;">
                 </div>
 
-                <button type="submit" class="btn btn-green" id="btnSubmitWhatsapp" 
-                        style="margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 10px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.433 5.626 1.433h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                <button type="submit" class="btn btn-green" id="btnSubmitWhatsapp"
+                    style="margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24"
+                        fill="currentColor">
+                        <path
+                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.433 5.626 1.433h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
                     </svg>
                     Enviar mensagem pelo WhatsApp
                 </button>
             </form>
-            <p id="msgValidacaoWhatsapp" style="font-size: 14px; color: #ff6b35; margin-top: 15px; text-align: center; visibility: hidden; min-height: 20px;">Preencha os campos corretamente</p>
+            <p id="msgValidacaoWhatsapp"
+                style="font-size: 14px; color: #ff6b35; margin-top: 15px; text-align: center; visibility: hidden; min-height: 20px;">
+                Preencha os campos corretamente</p>
         </div>
 
     </div>
@@ -1113,7 +1130,7 @@
             // BLOQUEIO: Se tentar ir para a Etapa 2 ou 3 sem ter preenchido a Etapa 1 (sem currentLeadId)
             if ((stepId === 'step2' || stepId === 'step3') && !currentLeadId) {
                 console.warn('Fluxo interrompido: Inscrição obrigatória antes de prosseguir.');
-                stepId = 'step1'; 
+                stepId = 'step1';
             }
 
             Object.values(stepElements).forEach(step => {
@@ -1188,7 +1205,7 @@
             // setTimeout(showCalendly, 10000);
 
             // Ouvindo eventos do Calendly para o Pixel
-            window.addEventListener('message', function(e) {
+            window.addEventListener('message', function (e) {
                 if (e.origin.includes("calendly.com") && e.data.event === 'calendly.event_scheduled') {
                     if (typeof fbq === 'function') fbq('trackCustom', 'ind_agendou_calendly');
                 }
@@ -1260,7 +1277,7 @@
                     currentLeadId = docRef.id;
                     sessionStorage.setItem('currentLeadId', currentLeadId); // Salva na sessão
                 }
-                
+
                 // Dispara evento do Pixel
                 if (typeof fbq === 'function') {
                     fbq('trackCustom', 'ind_disse_idade_e_nivel');
@@ -1642,7 +1659,7 @@
             inputTel.addEventListener('input', (e) => {
                 let v = e.target.value.replace(/\D/g, '');
                 if (v.length > 11) v = v.substring(0, 11);
-                
+
                 if (v.length <= 10) {
                     // Formato (XX) XXXX-XXXX (8 dígitos)
                     let x = v.match(/(\d{0,2})(\d{0,4})(\d{0,4})/);
