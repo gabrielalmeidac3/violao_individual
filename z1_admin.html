@@ -86,9 +86,11 @@
         <table id="tabelaLeads">
             <thead>
                 <tr>
-                    <th>Data da Inscrição</th>
+                    <th>Data Inscrição</th>
+                    <th>Nome</th>
+                    <th>WhatsApp</th>
                     <th>Idade</th>
-                    <th>Nível de Conhecimento</th>
+                    <th>Nível</th>
                 </tr>
             </thead>
             <tbody id="listaCorpo">
@@ -151,7 +153,7 @@
         // CARREGAR DADOS DO BANCO
         async function carregarDados() {
             try {
-                listaCorpo.innerHTML = '<tr><td colspan="3" style="text-align:center;">Carregando dados...</td></tr>';
+                listaCorpo.innerHTML = '<tr><td colspan="5" style="text-align:center;">Carregando dados...</td></tr>';
                 
                 // Pega do mais recente pro mais antigo
                 const snapshot = await db.collection('inscricoes_aula_gratuita')
@@ -161,21 +163,43 @@
                 listaCorpo.innerHTML = ''; // Limpa a tabela
                 
                 if(snapshot.empty) {
-                    listaCorpo.innerHTML = '<tr><td colspan="3" style="text-align:center;">Nenhuma inscrição ainda.</td></tr>';
+                    listaCorpo.innerHTML = '<tr><td colspan="5" style="text-align:center;">Nenhuma inscrição ainda.</td></tr>';
                     return;
                 }
 
                 snapshot.forEach(doc => {
                     const lead = doc.data();
+                    const row = listaCorpo.insertRow();
+                    
                     const dataFormatada = lead.data_cadastro ? lead.data_cadastro.toDate().toLocaleString('pt-BR') : 'Data Indisponível';
                     
-                    listaCorpo.innerHTML += `
-                        <tr>
-                            <td>${dataFormatada}</td>
-                            <td>${lead.idade} anos</td>
-                            <td style="text-transform: capitalize;">${lead.nivel}</td>
-                        </tr>
-                    `;
+                    // Coluna Data
+                    row.insertCell(0).textContent = dataFormatada;
+                    
+                    // Coluna Nome (Seguro contra XSS)
+                    const cellNome = row.insertCell(1);
+                    cellNome.style.fontWeight = '500';
+                    if (lead.nome) {
+                        cellNome.textContent = lead.nome;
+                    } else {
+                        cellNome.innerHTML = '<span style="color:#666">Pendente</span>';
+                    }
+
+                    // Coluna WhatsApp (Seguro contra XSS)
+                    const cellWA = row.insertCell(2);
+                    if (lead.whatsapp) {
+                        cellWA.textContent = lead.whatsapp;
+                    } else {
+                        cellWA.innerHTML = '<span style="color:#666">Pendente</span>';
+                    }
+
+                    // Coluna Idade
+                    row.insertCell(3).textContent = `${lead.idade || '??'} anos`;
+                    
+                    // Coluna Nível
+                    const cellNivel = row.insertCell(4);
+                    cellNivel.textContent = lead.nivel || 'Não informado';
+                    cellNivel.style.textTransform = 'capitalize';
                 });
             } catch (error) {
                 console.error(error);

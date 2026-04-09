@@ -1,0 +1,7 @@
+ind_clicou_video e ind_clicou_vid_depo: Identificam quem consome conteúdo e confia na sua prova social.
+
+ind_disse_idade_e_nivel: Otimizar anúncios para este evento é a estratégia mais inteligente para encontrar novos alunos.
+
+ind_wapp: Disparado no último botão. Captura o contato direto de quem não quis usar o agendador automático.
+
+1261048684985838
