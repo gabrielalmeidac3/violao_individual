@@ -1671,13 +1671,20 @@
                 return String(value).replace(/[&<>"'/]/ig, (match) => (map[match]));
             };
 
-            const nome = sanitize(document.getElementById('nomeWhatsapp').value).trim();
             const whatsapp = sanitize(document.getElementById('telWhatsapp').value).trim();
             const btnSubmit = document.getElementById('btnSubmitWhatsapp');
             const msgValidacao = document.getElementById('msgValidacaoWhatsapp');
 
-            // Validação de comprimento mínimo (14 para 8-dígitos ou 16 para 9-dígitos com espaços/hífen)
-            if (!nome || whatsapp.length < 14) {
+            // Validação de Nome
+            if (!nome) {
+                msgValidacao.textContent = 'Por favor, preencha seu nome.';
+                msgValidacao.style.visibility = 'visible';
+                return;
+            }
+
+            // Validação de WhatsApp (mínimo de 10 dígitos = 14 caracteres com máscara)
+            if (whatsapp.length < 14) {
+                msgValidacao.textContent = 'Insira um número de WhatsApp válido';
                 msgValidacao.style.visibility = 'visible';
                 return;
             }
