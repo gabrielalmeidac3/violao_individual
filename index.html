@@ -5,27 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aula de Violão Gratuita</title>
-    <link rel="icon" type="image/png" href="images/0_img.png">
+    <link rel="icon" type="image/webp" href="images/0_img.webp">
 
-    <!-- Meta Pixel Code -->
-    <script>
-        !function (f, b, e, v, n, t, s) {
-            if (f.fbq) return; n = f.fbq = function () {
-                n.callMethod ?
-                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-            };
-            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
-            n.queue = []; t = b.createElement(e); t.async = !0;
-            t.src = v; s = b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t, s)
-        }(window, document, 'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '1261048684985838');
-        fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-            src="https://www.facebook.com/tr?id=1261048684985838&ev=PageView&noscript=1" /></noscript>
-    <!-- End Meta Pixel Code -->
+
     <!-- Fonts Premium -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,10 +15,7 @@
         href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap"
         rel="stylesheet">
 
-    <!-- Firebase SDK Compat -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-check-compat.js"></script>
+
     <style>
         * {
             margin: 0;
@@ -837,7 +816,7 @@
             <h2 class="hero-promise">Aprenda a tocar músicas no violão de forma <span>simples e rápida</span></h2>
 
             <div class="image-glow-wrapper">
-                <img src="images/img.png" alt="Aula de Violão" class="intro-image"
+                <img src="images/img.webp" alt="Aula de Violão" class="intro-image"
                     style="max-width: 210px; margin-bottom: 5px; position: relative; z-index: 1;"
                     onerror="this.style.display='none'">
             </div>
@@ -914,7 +893,7 @@
 
         <!-- Etapa 1: Formulário -->
         <div class="step" id="step1">
-            <img src="images/img.png" alt="Gabriel Almeida - Aula de Violão" class="intro-image"
+            <img src="images/img.webp" alt="Gabriel Almeida - Aula de Violão" class="intro-image"
                 style="max-width: 160px; margin-bottom: 20px;" onerror="this.style.display='none'">
             <p class="intro-text" style="font-size: 15px; color: #b0b0b0; margin-bottom: 25px;">Aula de violão
                 individual gratuita em videochamada com Gabriel Almeida</p>
@@ -997,7 +976,7 @@
                 </button>
             </div>
 
-            <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
         </div>
 
         <!-- Etapa 3: Contato WhatsApp -->
@@ -1045,6 +1024,27 @@
         <div class="triangle-down-indicator light"></div>
     </div>
 
+    </footer>
+ 
+    <!-- Meta Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1261048684985838');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=1261048684985838&ev=PageView&noscript=1" /></noscript>
+    <!-- End Meta Pixel Code -->
     <footer class="site-footer">
         Gabriel Almeida 2026 &copy; todos os direitos reservados
     </footer>
@@ -1065,20 +1065,35 @@
         let db = null;
         let currentLeadId = sessionStorage.getItem('currentLeadId'); // Persiste o ID do lead na sessão
 
-        // Verifica se tem alguma chave configurada (não está vazio)
-        if (firebaseConfig.apiKey && firebaseConfig.apiKey !== "COLOCAR_AQUI") {
-            firebase.initializeApp(firebaseConfig);
+        // Função para carregar scripts dinamicamente
+        function loadScript(src) {
+            return new Promise((resolve, reject) => {
+                const s = document.createElement('script');
+                s.src = src;
+                s.onload = resolve;
+                s.onerror = reject;
+                document.body.appendChild(s);
+            });
+        }
 
-            // --- FIREBASE APP CHECK ---
-            // Proteção contra bots e requisições via F12
-            // O App Check será imposto via Firebase Console
-            const appCheck = firebase.appCheck();
-            appCheck.activate(
-                '6LeVrpYsAAAAABv0FBRfBGTAb8-F8oKJtLETfWcq', // Chave Pública (Site Key) do reCAPTCHA v3
-                true // true para refresh automático do token
-            );
+        async function initFirebase() {
+            if (window.firebase) return;
+            try {
+                await loadScript('https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js');
+                await Promise.all([
+                    loadScript('https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js'),
+                    loadScript('https://www.gstatic.com/firebasejs/9.22.0/firebase-app-check-compat.js')
+                ]);
 
-            db = firebase.firestore();
+                if (firebaseConfig.apiKey && firebaseConfig.apiKey !== "COLOCAR_AQUI") {
+                    firebase.initializeApp(firebaseConfig);
+                    const appCheck = firebase.appCheck();
+                    appCheck.activate('6LeVrpYsAAAAABv0FBRfBGTAb8-F8oKJtLETfWcq', true);
+                    db = firebase.firestore();
+                }
+            } catch (e) {
+                console.error("Erro ao carregar Firebase:", e);
+            }
         }
 
         let calendlyLoaded = false;
@@ -1180,6 +1195,7 @@
         };
 
         function nextStep() {
+            initFirebase(); // Inicia carregamento do Firebase assim que clica para ir ao formulário
             setActiveStep('step1', { pushState: true });
         }
 
@@ -1188,32 +1204,49 @@
             setActiveStep(stepId, { replaceState: true, smoothScroll: false });
         });
 
-        // Inicia o carregamento silencioso do calendário IMEDIATAMENTE assim que o primeiro link do site abre (Etapa 0)
+        // Inicia o carregamento do site
         window.addEventListener('DOMContentLoaded', function () {
             const initialStep = getStepFromHash(window.location.hash);
             setActiveStep(initialStep, { replaceState: true, smoothScroll: false });
+            
+            // Se já abrir em algum step que precise de Firebase
+            if (initialStep !== 'step0') {
+                initFirebase();
+            }
+        });
+
+        async function initCalendly() {
+            if (window.Calendly) return true;
+            try {
+                await loadScript('https://assets.calendly.com/assets/external/widget.js');
+                return true;
+            } catch (e) {
+                console.error("Erro ao carregar Calendly:", e);
+                return false;
+            }
+        }
+
+        async function setupCalendly() {
             const targetUrl = `https://calendly.com/suportegabriel7/1h?hide_gdpr_banner=1`;
             const calendlyEmbed = document.getElementById('calendlyEmbed');
-
-            // Pequeno delay de 500ms só para o visual principal da Etapa 0 pintar bonito antes do Calendly pesar a aba
-            setTimeout(() => {
-                if (window.Calendly) {
-                    calendlyEmbed.innerHTML = '';
-                    window.Calendly.initInlineWidget({ url: targetUrl, parentElement: calendlyEmbed });
-                } else {
-                    calendlyEmbed.innerHTML = `<iframe src="${targetUrl}" width="100%" height="100%" frameborder="0"></iframe>`;
-                }
-            }, 500);
+            
+            const loaded = await initCalendly();
+            if (loaded && window.Calendly) {
+                calendlyEmbed.innerHTML = '';
+                window.Calendly.initInlineWidget({ url: targetUrl, parentElement: calendlyEmbed });
+            } else {
+                calendlyEmbed.innerHTML = `<iframe src="${targetUrl}" width="100%" height="100%" frameborder="0"></iframe>`;
+            }
+        }
 
             // Fallback de 10s para limpar a bolinha de carregamento incondicionalmente - removido aqui para tratar no clique
             // setTimeout(showCalendly, 10000);
 
-            // Ouvindo eventos do Calendly para o Pixel
-            window.addEventListener('message', function (e) {
-                if (e.origin.includes("calendly.com") && e.data.event === 'calendly.event_scheduled') {
-                    if (typeof fbq === 'function') fbq('trackCustom', 'ind_agendou_calendly');
-                }
-            });
+        // Ouvindo eventos do Calendly para o Pixel
+        window.addEventListener('message', function (e) {
+            if (e.origin.includes("calendly.com") && e.data.event === 'calendly.event_scheduled') {
+                if (typeof fbq === 'function') fbq('trackCustom', 'ind_agendou_calendly');
+            }
         });
 
         document.getElementById('formDados').addEventListener('submit', async function (e) {
@@ -1291,6 +1324,7 @@
 
                 // Exibe a aba do Calendly na própria página
                 setActiveStep('step2', { pushState: true });
+                setupCalendly(); // Garante o carregamento do script e init do widget só agora
 
                 // Fallback para o loader do Calendly ao exibir a aba
                 setTimeout(() => {
@@ -1318,40 +1352,40 @@
 
         // --- Lógica do Carrossel ---
         const testimonials = [
-            { name: "Daia", city: "Paraná", img: "images/Daia do paraná.png", text: "Comecei totalmente do zero e já estou tocando várias músicas." },
-            { name: "Nazir", city: "Nova Serrana, Minas Gerais", img: "images/nazir.png", text: "Me identifiquei muito com o professor Gabriel e agora estou tocando mais de quatro músicas." },
-            { name: "Mariana Arcanja", city: "João Pessoa, PB", img: "images/mariana de joão pessoa PB.png", text: "Tinha meu violão há 30 anos e só agora com o professor Gabriel consegui realizar meu sonho. Já toco dezenas de músicas." },
-            { name: "Nilza", city: "Mato Grosso", img: "images/nilza do mato grosso.png", text: "Desde adolescente era meu sonho tocar. Em menos de um mês com o professor Gabriel já estou tocando minha primeira música. Estou super feliz." },
-            { name: "Nadir", city: "Petrópolis, Rio de Janeiro", img: "images/nadir do rio de janeiro.png", text: "Gabriel foi o melhor professor que eu já tive. Realmente me ajudou a entender. Já estou tocando dezenas de músicas." },
-            { name: "Bia Reis", city: "Almenara, Minas Gerais", img: "images/bia reis.png", text: "Meu grande sonho era tocar violão. Gabriel me fez entender de verdade, agora já toco mais de 20 músicas." },
-            { name: "Elita", city: "Sinop, Mato Grosso", img: "images/elita de goiais.png", text: "Em dois meses com o Gabriel aprendi a tocar músicas inteiras. Super recomendo." },
-            { name: "Nina Miranda", city: "Araxá, Minas Gerais", img: "images/nina de minas gerais.png", text: "Com poucas aulas estou aprendendo mais rápido coisas que tentei por anos, aprendi a tocar de verdade." },
-            { name: "Denilson Nogueira", city: "Teresina, Piauí", img: "images/denilson do piauí.png", text: "Minha maior dificuldade era a troca de acordes. Um mês depois eu consegui tocar minha primeira música." },
-            { name: "Sidnei", city: "São Paulo", img: "images/sidnei.png", text: "Estou superando a mim mesmo com o aprendizado de violão. Graças ao professor Gabriel já consigo tocar bastantes músicas. Gratidão." },
-            { name: "Carlos", city: "Paraná", img: "images/carlos.png", text: "Tinha muita dificuldade de acertar a altura da voz e o professor Gabriel está me ajudando, já estou muito feliz com o resultado." },
-            { name: "Cleide", city: "Sergipe", img: "images/cleide.png", text: "Comecei praticamente do zero e agora já estou tocando muitas músicas evangélicas." },
-            { name: "Ivo", city: "Paraná", img: "images/ivo.png", text: "Conheci o professor Gabriel no YouTube, é um professor muito paciente, já aprendi a tocar muitas músicas." },
-            { name: "Amélia", city: "São Paulo", img: "images/amelia.png", text: "Tenho 80 anos e estou aprendendo a tocar com o professor Gabriel, já estou tocando minha segunda música" }
+            { name: "Daia", city: "Paraná", img: "images/Daia do paraná.webp", text: "Comecei totalmente do zero e já estou tocando várias músicas." },
+            { name: "Nazir", city: "Nova Serrana, Minas Gerais", img: "images/nazir.webp", text: "Me identifiquei muito com o professor Gabriel e agora estou tocando mais de quatro músicas." },
+            { name: "Mariana Arcanja", city: "João Pessoa, PB", img: "images/mariana de joão pessoa PB.webp", text: "Tinha meu violão há 30 anos e só agora com o professor Gabriel consegui realizar meu sonho. Já toco dezenas de músicas." },
+            { name: "Nilza", city: "Mato Grosso", img: "images/nilza do mato grosso.webp", text: "Desde adolescente era meu sonho tocar. Em menos de um mês com o professor Gabriel já estou tocando minha primeira música. Estou super feliz." },
+            { name: "Nadir", city: "Petrópolis, Rio de Janeiro", img: "images/nadir do rio de janeiro.webp", text: "Gabriel foi o melhor professor que eu já tive. Realmente me ajudou a entender. Já estou tocando dezenas de músicas." },
+            { name: "Bia Reis", city: "Almenara, Minas Gerais", img: "images/bia reis.webp", text: "Meu grande sonho era tocar violão. Gabriel me fez entender de verdade, agora já toco mais de 20 músicas." },
+            { name: "Elita", city: "Sinop, Mato Grosso", img: "images/elita de goiais.webp", text: "Em dois meses com o Gabriel aprendi a tocar músicas inteiras. Super recomendo." },
+            { name: "Nina Miranda", city: "Araxá, Minas Gerais", img: "images/nina de minas gerais.webp", text: "Com poucas aulas estou aprendendo mais rápido coisas que tentei por anos, aprendi a tocar de verdade." },
+            { name: "Denilson Nogueira", city: "Teresina, Piauí", img: "images/denilson do piauí.webp", text: "Minha maior dificuldade era a troca de acordes. Um mês depois eu consegui tocar minha primeira música." },
+            { name: "Sidnei", city: "São Paulo", img: "images/sidnei.webp", text: "Estou superando a mim mesmo com o aprendizado de violão. Graças ao professor Gabriel já consigo tocar bastantes músicas. Gratidão." },
+            { name: "Carlos", city: "Paraná", img: "images/carlos.webp", text: "Tinha muita dificuldade de acertar a altura da voz e o professor Gabriel está me ajudando, já estou muito feliz com o resultado." },
+            { name: "Cleide", city: "Sergipe", img: "images/cleide.webp", text: "Comecei praticamente do zero e agora já estou tocando muitas músicas evangélicas." },
+            { name: "Ivo", city: "Paraná", img: "images/ivo.webp", text: "Conheci o professor Gabriel no YouTube, é um professor muito paciente, já aprendi a tocar muitas músicas." },
+            { name: "Amélia", city: "São Paulo", img: "images/amelia.webp", text: "Tenho 80 anos e estou aprendendo a tocar com o professor Gabriel, já estou tocando minha segunda música" }
         ];
 
         const videoTestimonials = [
-            { name: 'Nazir', location: 'Nova Serrana, Minas Gerais', src: 'videos/01 - Nazir.mp4', poster: 'images/nazir.png' },
-            { name: 'Denilson Nogueira', location: 'Teresina, Piauí', src: 'videos/02 - Denilson.mp4', poster: 'images/denilson do piauí.png', pos: 'center 20%' },
-            { name: 'Josineide', location: 'Estado de São Paulo', src: 'videos/03 - Josineide.mp4', poster: 'images/josineide.png' },
-            { name: 'Nina Miranda', location: 'Araxá, Minas Gerais', src: 'videos/04 - Nina Miranda.mp4', poster: 'images/nina de minas gerais.png', pos: 'center 75%', size: '80% auto', bgBlur: true },
-            { name: 'Elita', location: 'Sinop, Mato Grosso', src: 'videos/05 - Elita.mp4', poster: 'images/elita de goiais.png', pos: 'center', size: '80% auto', bgBlur: true },
-            { name: 'Neuda', location: 'Ceará', src: 'videos/06 - Neuda.mp4', poster: 'images/neuda.png' },
-            { name: 'Mariana Arcanja', location: 'João Pessoa, PB', src: 'videos/07 - Mariana.mp4', poster: 'images/mariana de joão pessoa PB.png' },
-            { name: 'Bia Reis', location: 'Almenara, Minas Gerais', src: 'videos/08 - Bia.mp4', poster: 'images/bia reis.png', pos: 'center top', size: '80% auto', bgBlur: true },
-            { name: 'Paulo', location: 'Espírito Santo', src: 'videos/09 - Paulo.mp4', poster: 'images/paulo.png' },
-            { name: 'Daia', location: 'Paraná', src: 'videos/10 - Daia.mp4', poster: 'images/Daia do paraná.png', pos: 'center', size: '80% auto', bgBlur: true },
-            { name: 'Nadir', location: 'Petrópolis, Rio de Janeiro', src: 'videos/11 - Nadir.mp4', poster: 'images/nadir do rio de janeiro.png', pos: 'center 90%', size: '80% auto', bgBlur: true },
-            { name: 'Carlos', location: 'Paraná', src: 'videos/12 - Carlos.mp4', poster: 'images/carlos.png', pos: 'center', size: '80% auto', bgBlur: true },
-            { name: 'Nilza', location: 'Mato Grosso', src: 'videos/13 - Nilza.mp4', poster: 'images/nilza do mato grosso.png', pos: 'center', size: '80% auto', bgBlur: true },
-            { name: 'Ivo Ferreira', location: 'Paraná', src: 'videos/14 - Ivo Ferreira.mp4', poster: 'images/ivo.png', pos: 'center top' },
-            { name: 'Cleide', location: 'Sergipe', src: 'videos/15 - Cleide.mp4', poster: 'images/cleide.png' },
-            { name: 'Antônia', location: 'Ceará', src: 'videos/16 - Depoimento Aluna Antônia_editado.mp4', poster: 'images/antonia.png' },
-            { name: 'Amélia', location: 'São Paulo', src: 'videos/17 - Tocando violão aos 80 anos Depoimento Aluna Amélia_editado.mp4', poster: 'images/amelia.png', pos: 'center', size: '50% auto', bgBlur: true }
+            { name: 'Nazir', location: 'Nova Serrana, Minas Gerais', src: 'videos/01 - Nazir.mp4', poster: 'images/nazir.webp' },
+            { name: 'Denilson Nogueira', location: 'Teresina, Piauí', src: 'videos/02 - Denilson.mp4', poster: 'images/denilson do piauí.webp', pos: 'center 20%' },
+            { name: 'Josineide', location: 'Estado de São Paulo', src: 'videos/03 - Josineide.mp4', poster: 'images/josineide.webp' },
+            { name: 'Nina Miranda', location: 'Araxá, Minas Gerais', src: 'videos/04 - Nina Miranda.mp4', poster: 'images/nina de minas gerais.webp', pos: 'center 75%', size: '80% auto', bgBlur: true },
+            { name: 'Elita', location: 'Sinop, Mato Grosso', src: 'videos/05 - Elita.mp4', poster: 'images/elita de goiais.webp', pos: 'center', size: '80% auto', bgBlur: true },
+            { name: 'Neuda', location: 'Ceará', src: 'videos/06 - Neuda.mp4', poster: 'images/neuda.webp' },
+            { name: 'Mariana Arcanja', location: 'João Pessoa, PB', src: 'videos/07 - Mariana.mp4', poster: 'images/mariana de joão pessoa PB.webp' },
+            { name: 'Bia Reis', location: 'Almenara, Minas Gerais', src: 'videos/08 - Bia.mp4', poster: 'images/bia reis.webp', pos: 'center top', size: '80% auto', bgBlur: true },
+            { name: 'Paulo', location: 'Espírito Santo', src: 'videos/09 - Paulo.mp4', poster: 'images/paulo.webp' },
+            { name: 'Daia', location: 'Paraná', src: 'videos/10 - Daia.mp4', poster: 'images/Daia do paraná.webp', pos: 'center', size: '80% auto', bgBlur: true },
+            { name: 'Nadir', location: 'Petrópolis, Rio de Janeiro', src: 'videos/11 - Nadir.mp4', poster: 'images/nadir do rio de janeiro.webp', pos: 'center 90%', size: '80% auto', bgBlur: true },
+            { name: 'Carlos', location: 'Paraná', src: 'videos/12 - Carlos.mp4', poster: 'images/carlos.webp', pos: 'center', size: '80% auto', bgBlur: true },
+            { name: 'Nilza', location: 'Mato Grosso', src: 'videos/13 - Nilza.mp4', poster: 'images/nilza do mato grosso.webp', pos: 'center', size: '80% auto', bgBlur: true },
+            { name: 'Ivo Ferreira', location: 'Paraná', src: 'videos/14 - Ivo Ferreira.mp4', poster: 'images/ivo.webp', pos: 'center top' },
+            { name: 'Cleide', location: 'Sergipe', src: 'videos/15 - Cleide.mp4', poster: 'images/cleide.webp' },
+            { name: 'Antônia', location: 'Ceará', src: 'videos/16 - Depoimento Aluna Antônia_editado.mp4', poster: 'images/antonia.webp' },
+            { name: 'Amélia', location: 'São Paulo', src: 'videos/17 - Tocando violão aos 80 anos Depoimento Aluna Amélia_editado.mp4', poster: 'images/amelia.webp', pos: 'center', size: '50% auto', bgBlur: true }
         ];
 
         // Removido setupFeaturedVideo antigo daqui e movido para baixo de videoTestimonialsExtra
@@ -1370,7 +1404,7 @@
             testimonials.forEach((t, index) => {
                 const item = document.createElement('div');
                 item.className = 'carousel-item';
-                item.innerHTML = `<img src="${t.img}" onerror="this.src='images/img.png'" alt="${t.name}">`;
+                item.innerHTML = `<img src="${t.img}" onerror="this.src='images/img.webp'" alt="${t.name}">`;
                 track.appendChild(item);
 
                 const dot = document.createElement('div');
@@ -1585,7 +1619,7 @@
             nameEl.textContent = featured.name;
             cityEl.textContent = featured.location;
 
-            const poster = featured.poster || 'images/img.png';
+            const poster = featured.poster || 'images/img.webp';
             const pos = featured.pos || 'center';
             const size = featured.size || 'cover';
             const bgBlur = !!featured.bgBlur;
