@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Agende sua aula de violão gratuita com o professor Gabriel Almeida. Aulas individuais e personalizadas por videochamada para quem tem mais de 40 anos.">
     <title>Aula de Violão Gratuita</title>
     <link rel="icon" type="image/webp" href="images/0_img.webp">
 
@@ -11,9 +12,11 @@
     <!-- Fonts Premium -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap"
-        rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+    </noscript>
 
 
     <style>
@@ -510,6 +513,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            min-height: 380px; /* Reserva espaço para evitar CLS */
         }
 
         .carousel-track-container {
@@ -809,7 +813,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <main class="container">
 
         <!-- Etapa 0: Início -->
         <div class="step active" id="step0">
@@ -817,6 +821,7 @@
 
             <div class="image-glow-wrapper">
                 <img src="images/img.webp" alt="Aula de Violão" class="intro-image"
+                    width="210" height="210" fetchpriority="high"
                     style="max-width: 210px; margin-bottom: 5px; position: relative; z-index: 1;"
                     onerror="this.style.display='none'">
             </div>
@@ -894,6 +899,7 @@
         <!-- Etapa 1: Formulário -->
         <div class="step" id="step1">
             <img src="images/img.webp" alt="Gabriel Almeida - Aula de Violão" class="intro-image"
+                width="160" height="160"
                 style="max-width: 160px; margin-bottom: 20px;" onerror="this.style.display='none'">
             <p class="intro-text" style="font-size: 15px; color: #b0b0b0; margin-bottom: 25px;">Aula de violão
                 individual gratuita em videochamada com Gabriel Almeida</p>
@@ -1016,16 +1022,14 @@
                 style="font-size: 14px; color: #ff6b35; margin-top: 15px; text-align: center; visibility: hidden; min-height: 20px;">
                 Preencha os campos corretamente</p>
         </div>
-
-    </div>
+    </main>
 
     <div class="scroll-indicator-fixed" id="scrollIndicator">
         <div class="triangle-down-indicator"></div>
         <div class="triangle-down-indicator light"></div>
     </div>
 
-    </footer>
- 
+
     <!-- Meta Pixel Code -->
     <script>
         !function (f, b, e, v, n, t, s) {
@@ -1404,7 +1408,7 @@
             testimonials.forEach((t, index) => {
                 const item = document.createElement('div');
                 item.className = 'carousel-item';
-                item.innerHTML = `<img src="${t.img}" onerror="this.src='images/img.webp'" alt="${t.name}">`;
+                item.innerHTML = `<img src="${t.img}" width="80" height="80" onerror="this.src='images/img.webp'" alt="${t.name}">`;
                 track.appendChild(item);
 
                 const dot = document.createElement('div');
