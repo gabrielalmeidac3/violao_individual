@@ -920,6 +920,33 @@
             width: 100%;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
+
+        .section-title {
+            font-size: 1.5em;
+            color: #ffb74d;
+            /* Mudado de branco para laranja claro */
+            margin-top: 0;
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 12px;
+            display: block;
+            width: 100%;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: #ffffff;
+            /* Mudado de laranja para branco */
+            border-radius: 1px;
+        }
     </style>
 </head>
 
@@ -998,9 +1025,7 @@
             <!-- Seção de Depoimentos -->
             <section class="testimonials-section">
                 <!-- Carousel -->
-                <h2 style="font-size: 1.5em; color: rgb(255, 166, 0); margin-top: 0; margin-bottom: 20px;">Depoimentos
-                    dos
-                    alunos</h2>
+                <h2 class="section-title">Depoimentos dos alunos</h2>
                 <div class="testimonial-carousel" id="carouselWrapper">
                     <div class="carousel-track-container" id="carouselTrack"></div>
 
@@ -1036,9 +1061,7 @@
 
                 <!-- Video Section -->
                 <div class="video-section-wrapper">
-                    <h2 style="font-size: 1.5em; color: rgb(255, 166, 0); margin-top: 5px; margin-bottom: 15px;">
-                        Depoimentos em
-                        vídeo</h2>
+                    <h2 class="section-title" style="margin-top: 5px;">Depoimentos em vídeo</h2>
                     <div class="video-card">
                         <div class="video-card-header">
                             <p class="video-person-name" id="featuredVideoName">Carregando depoimento...</p>
@@ -1370,11 +1393,17 @@
         };
 
         function goToStep0() {
+            if (typeof fbq === 'function' && !_isTest) {
+                fbq('trackCustom', 'ind_clicou_sim');
+            }
             setActiveStep('step0', { pushState: true });
         }
 
         function nextStep() {
-            initFirebase(); // Inicia carregamento do Firebase assim que clica para ir ao formulário
+            initFirebase();
+            if (typeof fbq === 'function' && !_isTest) {
+                fbq('trackCustom', 'ind_viu_form');
+            }
             setActiveStep('step1', { pushState: true });
         }
 
