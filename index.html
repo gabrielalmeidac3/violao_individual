@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Agende sua aula de violão gratuita com o professor Gabriel Almeida. Aulas individuais e personalizadas por videochamada para quem tem mais de 40 anos.">
+    <meta name="description"
+        content="Agende sua aula de violão gratuita com o professor Gabriel Almeida. Aulas individuais e personalizadas por videochamada para quem tem mais de 40 anos.">
     <title>Aula de Violão Gratuita</title>
     <link rel="icon" type="image/webp" href="images/0_img.webp">
 
@@ -12,10 +13,15 @@
     <!-- Fonts Premium -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap"
+        rel="stylesheet" media="print" onload="this.media='all'">
     <noscript>
-        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap"
+            rel="stylesheet">
     </noscript>
 
 
@@ -112,6 +118,41 @@
             align-items: center;
             gap: 8px;
             box-shadow: 0 2px 10px rgba(255, 183, 77, 0.1);
+        }
+
+        .free-badge {
+            background: rgba(76, 175, 80, 0.15);
+            color: #81c784;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 700;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            animation: pulse-simple 2s infinite alternate;
+        }
+
+        @keyframes pulse-simple {
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(1.03);
+            }
+        }
+
+        .free-badge svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+            flex-shrink: 0;
         }
 
         .exclusive-badge svg {
@@ -508,12 +549,14 @@
             width: 100%;
             max-width: 400px;
             overflow: hidden;
-            margin: 10px 0 30px;
+            margin: 10px 0 5px;
+            /* Reduzido de 30px para 5px */
             padding: 10px 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 380px; /* Reserva espaço para evitar CLS */
+            min-height: 380px;
+            /* Reserva espaço para evitar CLS */
         }
 
         .carousel-track-container {
@@ -578,11 +621,12 @@
         .carousel-info {
             text-align: center;
             margin-top: 25px;
-            min-height: 140px;
+            height: 140px;
+            /* Reduzido para dar mais espaço interno sem descer as bolinhas */
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
-            padding-bottom: 10px;
+            padding-bottom: 0px;
         }
 
         .carousel-name {
@@ -598,32 +642,88 @@
             margin-bottom: 10px;
         }
 
+        .carousel-stars {
+            display: flex;
+            justify-content: center;
+            gap: 3px;
+            margin-bottom: 8px;
+            color: #ffb74d;
+        }
+
+        .carousel-stars svg {
+            width: 15px;
+            height: 15px;
+            fill: currentColor;
+        }
+
         .carousel-text {
-            font-size: 14px;
+            font-size: 16px;
             font-style: italic;
             color: #e3f2fd;
             max-width: 350px;
             margin: 0 auto;
-            line-height: 1.4;
-            opacity: 0.9;
+            line-height: 1.5;
+            opacity: 0.95;
+            max-height: 100px;
+            overflow-y: auto;
+            padding: 0 10px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(76, 175, 80, 0.3) rgba(255, 255, 255, 0.05);
+        }
+
+        .carousel-text::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .carousel-text::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .carousel-text::-webkit-scrollbar-thumb {
+            background: rgba(76, 175, 80, 0.4);
+            border-radius: 10px;
+        }
+
+        .carousel-text::-webkit-scrollbar-thumb:hover {
+            background: rgba(76, 175, 80, 0.6);
         }
 
         .carousel-dots {
             display: flex;
-            justify-content: center;
-            gap: 6px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-            max-width: 200px;
+            justify-content: space-between;
+            /* Distribui as bolinhas uniformemente */
+            align-items: center;
+            margin-top: 15px;
+            /* Aumentado para dar respiro em relação ao texto */
+            flex-wrap: nowrap;
+            width: 100%;
+            max-width: 250px;
+            /* Largura fixa para não encostar nas bordas */
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 10px;
         }
 
         .carousel-dot {
             width: 8px;
+            /* Tamanho equilibrado */
             height: 8px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.2);
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .carousel-dot.active {
+            background: #4caf50;
+            transform: scale(1.3);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .carousel-dot:hover {
+            background: rgba(255, 255, 255, 0.5);
         }
 
         .carousel-dot.active {
@@ -809,20 +909,53 @@
             z-index: 10;
             position: relative;
         }
+
+        .testimonials-section {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 25px;
+            padding: 25px 15px;
+            margin-top: 60px;
+            margin-bottom: 40px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
     </style>
 </head>
 
 <body>
     <main class="container">
 
+        <!-- Etapa Inicial: Compromisso -->
+        <div class="step active" id="stepPre" style="justify-content: flex-start; padding-top: 25px;">
+            <h2 class="hero-promise" style="font-size: 26px; margin-bottom: 15px; margin-top: 0;">Aprenda a tocar
+                músicas no violão de forma <span>simples e rápida</span></h2>
+
+            <div class="image-glow-wrapper" style="margin-bottom: 35px;">
+                <img src="images/img.webp" alt="Aula de Violão" class="intro-image" width="190" height="190"
+                    style="max-width: 190px; margin-bottom: 0;" onerror="this.style.display='none'">
+            </div>
+
+            <div
+                style="background: rgba(255, 255, 255, 0.04); padding: 25px 20px; border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.08); width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                <h1
+                    style="background: none; -webkit-text-fill-color: #ffffff; color: #ffffff; margin-bottom: 25px; line-height: 1.3; font-size: 26px; font-weight: 700; font-family: 'Playfair Display', serif;">
+                    Você tem mais de 40 anos e quer realizar o sonho de tocar violão?</h1>
+
+                <button class="btn btn-green" onclick="goToStep0()"
+                    style="margin-top: 5px; padding: 20px; font-size: 19px; line-height: 1.3; width: 100%; border-radius: 20px; box-shadow: 0 10px 25px rgba(44, 174, 98, 0.4);">
+                    Sim, tenho mais de 40 anos e quero aprender violão
+                </button>
+            </div>
+        </div>
+
         <!-- Etapa 0: Início -->
-        <div class="step active" id="step0">
+        <div class="step" id="step0">
             <h2 class="hero-promise">Aprenda a tocar músicas no violão de forma <span>simples e rápida</span></h2>
 
             <div class="image-glow-wrapper">
-                <img src="images/img.webp" alt="Aula de Violão" class="intro-image"
-                    width="210" height="210" fetchpriority="high"
-                    style="max-width: 210px; margin-bottom: 5px; position: relative; z-index: 1;"
+                <img src="images/img.webp" alt="Aula de Violão" class="intro-image" width="210" height="210"
+                    fetchpriority="high" style="max-width: 210px; margin-bottom: 5px; position: relative; z-index: 1;"
                     onerror="this.style.display='none'">
             </div>
 
@@ -851,43 +984,77 @@
                 style="background: none; -webkit-text-fill-color: #66bb6a; color: #66bb6a; margin-bottom: 10px; font-size: 32px; font-weight: 700; text-shadow: 0 4px 20px rgba(76, 175, 80, 0.4); letter-spacing: 1px;">
                 INDIVIDUAIS</h1>
 
+            <div class="free-badge">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z">
+                    </path>
+                </svg>
+                <span>Primeira Aula Grátis</span>
+            </div>
+
             <p class="intro-text" style="font-size: 16px; color: #b0b0b0; margin-bottom: 20px; font-weight: 300;">Em
                 videochamada direta com Gabriel Almeida</p>
 
-            <!-- Carousel -->
-            <h2 style="font-size: 1.2em; color: rgb(255, 166, 0); margin-top: 10px; margin-bottom: 5px;">Depoimentos dos
-                alunos</h2>
-            <div class="testimonial-carousel" id="carouselWrapper">
-                <div class="carousel-track-container" id="carouselTrack"></div>
+            <!-- Seção de Depoimentos -->
+            <section class="testimonials-section">
+                <!-- Carousel -->
+                <h2 style="font-size: 1.5em; color: rgb(255, 166, 0); margin-top: 0; margin-bottom: 20px;">Depoimentos
+                    dos
+                    alunos</h2>
+                <div class="testimonial-carousel" id="carouselWrapper">
+                    <div class="carousel-track-container" id="carouselTrack"></div>
 
-                <div class="carousel-info">
-                    <div class="carousel-name" id="carouselName"></div>
-                    <div class="carousel-city" id="carouselCity"></div>
-                    <div class="carousel-text" id="carouselText"></div>
+                    <div class="carousel-info">
+                        <div class="carousel-stars">
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                            </svg>
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                            </svg>
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                            </svg>
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                            </svg>
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                            </svg>
+                        </div>
+                        <div class="carousel-name" id="carouselName"></div>
+                        <div class="carousel-city" id="carouselCity"></div>
+                        <div class="carousel-text" id="carouselText"></div>
+                    </div>
+                    <div class="carousel-dots" id="carouselDots"></div>
                 </div>
-                <div class="carousel-dots" id="carouselDots"></div>
-            </div>
 
-            <!-- Video Section -->
-            <div class="video-section-wrapper">
-                <h2 style="font-size: 1.2em; color: rgb(255, 166, 0); margin-top: 30px; margin-bottom: 15px;">
-                    Depoimentos em
-                    vídeo</h2>
-                <div class="video-card">
-                    <div class="video-card-header">
-                        <p class="video-person-name" id="featuredVideoName">Carregando depoimento...</p>
-                        <p class="video-person-city" id="featuredVideoCity"></p>
+                <!-- Video Section -->
+                <div class="video-section-wrapper">
+                    <h2 style="font-size: 1.5em; color: rgb(255, 166, 0); margin-top: 5px; margin-bottom: 15px;">
+                        Depoimentos em
+                        vídeo</h2>
+                    <div class="video-card">
+                        <div class="video-card-header">
+                            <p class="video-person-name" id="featuredVideoName">Carregando depoimento...</p>
+                            <p class="video-person-city" id="featuredVideoCity"></p>
+                        </div>
+                        <div class="video-container" id="featuredVideoContainer">
+                            <!-- Carregado via JS para não pesar o site -->
+                        </div>
                     </div>
-                    <div class="video-container" id="featuredVideoContainer">
-                        <!-- Carregado via JS para não pesar o site -->
-                    </div>
+                    <button class="btn btn-blue-outline" id="btnMoreVideos" onclick="toggleVideoList()">Ver Todos
+                        Depoimentos
+                        em
+                        Vídeo</button>
+                    <div id="extraVideos" class="video-list"></div>
                 </div>
-                <button class="btn btn-blue-outline" id="btnMoreVideos" onclick="toggleVideoList()">Ver Todos
-                    Depoimentos
-                    em
-                    Vídeo</button>
-                <div id="extraVideos" class="video-list"></div>
-            </div>
+            </section>
 
             <p class="call-to-action-title">Pronto para começar?</p>
 
@@ -898,9 +1065,8 @@
 
         <!-- Etapa 1: Formulário -->
         <div class="step" id="step1">
-            <img src="images/img.webp" alt="Gabriel Almeida - Aula de Violão" class="intro-image"
-                width="160" height="160"
-                style="max-width: 160px; margin-bottom: 20px;" onerror="this.style.display='none'">
+            <img src="images/img.webp" alt="Gabriel Almeida - Aula de Violão" class="intro-image" width="160"
+                height="160" style="max-width: 160px; margin-bottom: 20px;" onerror="this.style.display='none'">
             <p class="intro-text" style="font-size: 15px; color: #b0b0b0; margin-bottom: 25px;">Aula de violão
                 individual gratuita em videochamada com Gabriel Almeida</p>
             <form id="formDados"
@@ -1032,10 +1198,11 @@
 
     <!-- Meta Pixel Code -->
     <script>
+        const _isTest = new URLSearchParams(window.location.search).has('test');
         !function (f, b, e, v, n, t, s) {
             if (f.fbq) return; n = f.fbq = function () {
                 n.callMethod ?
-                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
             };
             if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
             n.queue = []; t = b.createElement(e); t.async = !0;
@@ -1043,8 +1210,10 @@
             s.parentNode.insertBefore(t, s)
         }(window, document, 'script',
             'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '1261048684985838');
-        fbq('track', 'PageView');
+        if (!_isTest) {
+            fbq('init', '1261048684985838');
+            fbq('track', 'PageView');
+        }
     </script>
     <noscript><img height="1" width="1" style="display:none"
             src="https://www.facebook.com/tr?id=1261048684985838&ev=PageView&noscript=1" /></noscript>
@@ -1116,6 +1285,7 @@
         });
 
         const stepElements = {
+            stepPre: document.getElementById('stepPre'),
             step0: document.getElementById('step0'),
             step1: document.getElementById('step1'),
             step2: document.getElementById('step2'),
@@ -1123,7 +1293,8 @@
         };
 
         const historyHashMap = {
-            step0: '',
+            stepPre: '',
+            step0: '#inicio',
             step1: '#agendar',
             step2: '#calendario',
             step3: '#whatsapp'
@@ -1132,9 +1303,9 @@
         const scrollIndicator = document.getElementById('scrollIndicator');
 
         const getStepFromHash = (hash) => {
-            if (!hash) return 'step0';
+            if (!hash) return 'stepPre';
             const normalized = hash.toLowerCase();
-            return Object.entries(historyHashMap).find(([, value]) => value === normalized)?.[0] || 'step0';
+            return Object.entries(historyHashMap).find(([, value]) => value === normalized)?.[0] || 'stepPre';
         };
 
         const updateHistoryForStep = (stepId, { replace = false } = {}) => {
@@ -1198,6 +1369,10 @@
             }
         };
 
+        function goToStep0() {
+            setActiveStep('step0', { pushState: true });
+        }
+
         function nextStep() {
             initFirebase(); // Inicia carregamento do Firebase assim que clica para ir ao formulário
             setActiveStep('step1', { pushState: true });
@@ -1212,7 +1387,7 @@
         window.addEventListener('DOMContentLoaded', function () {
             const initialStep = getStepFromHash(window.location.hash);
             setActiveStep(initialStep, { replaceState: true, smoothScroll: false });
-            
+
             // Se já abrir em algum step que precise de Firebase
             if (initialStep !== 'step0') {
                 initFirebase();
@@ -1233,7 +1408,7 @@
         async function setupCalendly() {
             const targetUrl = `https://calendly.com/suportegabriel7/1h?hide_gdpr_banner=1`;
             const calendlyEmbed = document.getElementById('calendlyEmbed');
-            
+
             const loaded = await initCalendly();
             if (loaded && window.Calendly) {
                 calendlyEmbed.innerHTML = '';
@@ -1243,13 +1418,13 @@
             }
         }
 
-            // Fallback de 10s para limpar a bolinha de carregamento incondicionalmente - removido aqui para tratar no clique
-            // setTimeout(showCalendly, 10000);
+        // Fallback de 10s para limpar a bolinha de carregamento incondicionalmente - removido aqui para tratar no clique
+        // setTimeout(showCalendly, 10000);
 
         // Ouvindo eventos do Calendly para o Pixel
         window.addEventListener('message', function (e) {
             if (e.origin.includes("calendly.com") && e.data.event === 'calendly.event_scheduled') {
-                if (typeof fbq === 'function') fbq('trackCustom', 'ind_agendou_calendly');
+                if (typeof fbq === 'function' && !_isTest) fbq('trackCustom', 'ind_agendou_calendly');
             }
         });
 
@@ -1320,7 +1495,7 @@
                 }
 
                 // Dispara evento do Pixel
-                if (typeof fbq === 'function') {
+                if (typeof fbq === 'function' && !_isTest) {
                     fbq('trackCustom', 'ind_disse_idade_e_nivel');
                 }
 
@@ -1576,7 +1751,7 @@
             if (!container) return;
 
             // Disparar evento do Pixel se houver
-            if (trackingEvent && typeof fbq === 'function') {
+            if (trackingEvent && typeof fbq === 'function' && !_isTest) {
                 fbq('trackCustom', trackingEvent);
             }
 
@@ -1782,7 +1957,7 @@
                 }
 
                 // Dispara evento do Pixel
-                if (typeof fbq === 'function') {
+                if (typeof fbq === 'function' && !_isTest) {
                     fbq('trackCustom', 'ind_wapp');
                 }
 
