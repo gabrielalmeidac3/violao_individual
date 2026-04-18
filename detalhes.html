@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Detalhes das aulas individuais de violão com Gabriel Almeida.">
+    <title>Detalhes - Aulas de Violão</title>
+    <link rel="icon" type="image/webp" href="images/0_img.webp">
+
+    <!-- Fonts Premium -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+
+    <!-- CSS Base do Index para manter identidade -->
+    <style>
+        /* Estilos globais herdados do index.html */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { overflow-x: hidden; width: 100%; }
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(135deg, #070b1a 0%, #111424 50%, #0d122b 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 20px 10px;
+        }
+
+        .container {
+            max-width: 450px;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        /* Estilos específicos para os blocos puxados (Hero, Carrossel, Videos) */
+        /* Copiados do index.html para garantir renderização correta */
+        .hero-promise { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 28px; 
+            font-weight: 600; 
+            line-height: 1.3; 
+            margin: 60px 15px 15px 15px; /* Mais margem no topo e lados */
+            text-align: center; 
+            color: #ffffff; 
+        }
+        .hero-promise span { color: #ffb74d; font-style: italic; font-family: 'Playfair Display', serif; }
+        .image-glow-wrapper { position: relative; display: flex; justify-content: center; margin-bottom: 20px; }
+        .intro-image { width: 100%; max-width: 210px; height: auto; z-index: 1; }
+        .image-glow-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(176, 196, 222, 0.15) 0%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .exclusive-badge { 
+            background: rgba(201, 168, 76, 0.15); 
+            color: #ffb74d; 
+            padding: 8px 20px; 
+            border-radius: 30px; 
+            font-weight: 600; 
+            border: 1px solid rgba(201, 168, 76, 0.3); 
+            font-size: 13px; 
+            text-transform: uppercase; 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 8px; 
+            margin: 0 auto;
+            font-family: 'Outfit', sans-serif;
+        }
+        .exclusive-badge svg { 
+            width: 16px; 
+            height: 16px; 
+            fill: #ffb74d; 
+            margin-right: 2px;
+        }
+        
+        .testimonials-section { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 25px; padding: 25px 15px; width: 100%; }
+        .section-title { font-size: 1.5em; color: #ffb74d; margin-bottom: 25px; text-align: center; font-family: 'Playfair Display', serif; position: relative; padding-bottom: 12px; }
+        /* Removido pseudo-elemento que parecia uma faixa horizontal indesejada */
+
+        /* Carousel Styles */
+        .testimonial-carousel { position: relative; width: 100%; display: flex; flex-direction: column; align-items: center; min-height: 380px; }
+        .carousel-track-container { position: relative; width: 100%; height: 100px; display: flex; justify-content: center; align-items: center; perspective: 600px; margin-bottom: 20px; }
+        .carousel-item { position: absolute; width: 80px; height: 80px; border-radius: 50%; transition: all 0.4s ease; opacity: 0; z-index: 1; overflow: hidden; background: #2a2a2a; border: 2px solid transparent; }
+        .carousel-item img { width: 100%; height: 100%; object-fit: cover; }
+        .carousel-item.active { opacity: 1; transform: translateX(0) scale(1.3); z-index: 5; border-color: #4caf50; }
+        .carousel-item.prev { opacity: 0.4; transform: translateX(-70px) scale(0.9); z-index: 3; }
+        .carousel-item.next { opacity: 0.5; transform: translateX(70px) scale(0.9); z-index: 3; }
+        .carousel-info { text-align: center; margin-top: 25px; min-height: 140px; width: 100%; }
+        .carousel-name { font-size: 17px; font-weight: bold; color: #fff; margin-bottom: 2px; }
+        .carousel-city { font-size: 13px; color: #b0b0b0; margin-bottom: 10px; }
+        .carousel-stars { display: flex; justify-content: center; gap: 3px; margin-bottom: 8px; color: #ffb74d; }
+        .carousel-stars svg { width: 15px; height: 15px; fill: currentColor; }
+        .carousel-text { 
+            font-size: 16px; 
+            font-style: italic; 
+            color: #e3f2fd; 
+            max-width: 350px; 
+            margin: 0 auto; 
+            line-height: 1.5; 
+            opacity: 0.95; 
+            max-height: 100px; 
+            overflow-y: auto; 
+            padding: 0 10px; 
+            scrollbar-width: thin;
+            scrollbar-color: rgba(76, 175, 80, 0.3) rgba(255, 255, 255, 0.05);
+        }
+        .carousel-text::-webkit-scrollbar { width: 5px; }
+        .carousel-text::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); border-radius: 10px; }
+        .carousel-text::-webkit-scrollbar-thumb { background: rgba(76, 175, 80, 0.4); border-radius: 10px; }
+        .carousel-text::-webkit-scrollbar-thumb:hover { background: rgba(76, 175, 80, 0.6); }
+        .carousel-dots { display: flex; justify-content: center; gap: 8px; margin-top: 15px; }
+        .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); cursor: pointer; transition: all 0.3s ease; }
+        .carousel-dot.active { background: #4caf50; transform: scale(1.3); }
+
+        /* Video Card Styles */
+        .video-card { background: rgba(15, 18, 45, 0.9); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 18px; padding: 18px; box-shadow: 0 12px 30px rgba(0,0,0,0.65); display: flex; flex-direction: column; gap: 14px; width: 100%; }
+        .video-container { width: 100%; background: #000; border-radius: 12px; overflow: hidden; position: relative; padding-top: 56.25%; height: 0; }
+        .video-person-name { font-family: 'Playfair Display', serif; font-size: 18px; color: #f1f2f5; margin: 0; }
+        .video-person-city { font-size: 12px; color: #90a4ae; margin: 0; text-transform: uppercase; }
+        .video-placeholder { position: absolute; inset: 0; cursor: pointer; display: flex; align-items: center; justify-content: center; background-size: cover; background-position: center; }
+        .play-button-overlay { width: 60px; height: 60px; background: rgba(76, 175, 80, 0.4); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.3); transition: all 0.3s ease; }
+        .play-button-overlay svg { width: 25px; height: 25px; fill: white; margin-left: 3px; }
+        .video-placeholder:hover .play-button-overlay { transform: scale(1.1); background: rgba(76, 175, 80, 0.8); }
+        .btn-blue-outline { background: rgba(30, 42, 71, 0.6); color: #e3f2fd; border: 1px solid rgba(176, 196, 222, 0.3); padding: 12px; border-radius: 10px; cursor: pointer; font-family: 'Outfit', sans-serif; width: 100%; margin-top: 15px; }
+
+        /* Estilos do Bloco de Detalhes e Preço */
+        .details-card {
+            background: rgba(15, 18, 45, 0.95); /* Mais opaco e sem blur para evitar artefatos */
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 28px;
+            /* Sombras simplificadas */
+        }
+
+        .feature-list { list-style: none; display: flex; flex-direction: column; gap: 18px; }
+        .feature-item { display: flex; align-items: flex-start; gap: 14px; font-size: 16px; line-height: 1.5; }
+        .feature-icon { color: #4caf50; flex-shrink: 0; font-size: 19px; }
+        .sub-text { font-size: 13px; color: #90a4ae; display: block; margin-top: 5px; font-style: italic; }
+
+
+        .btn-list { background: rgba(100, 181, 246, 0.1); color: #90caf9; border: 1px solid rgba(144, 202, 249, 0.3); padding: 14px; border-radius: 12px; cursor: pointer; font-family: 'Outfit', sans-serif; font-weight: 600; width: 100%; margin-top: 15px; }
+        .lessons-block { max-height: 0; overflow: hidden; transition: all 0.5s ease; background: rgba(0, 0, 0, 0.4); border-radius: 12px; margin-top: 12px; opacity: 0; }
+        .lessons-block.open { max-height: 350px; overflow-y: auto; border: 1px solid rgba(255, 255, 255, 0.06); padding: 15px; opacity: 1; }
+
+        .price-section {
+            background: linear-gradient(145deg, rgba(25, 30, 50, 0.98) 0%, rgba(15, 20, 40, 0.98) 100%);
+            border-radius: 24px;
+            padding: 35px;
+            text-align: center;
+            border: 1px solid rgba(100, 181, 246, 0.2);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
+        }
+
+        .old-price { 
+            color: #b0bec5; 
+            font-size: 18px; 
+            display: block; 
+            opacity: 0.9; 
+            margin-bottom: 5px; 
+        }
+
+        .strikethrough-red {
+            position: relative;
+            color: #ff5252;
+            margin-left: 8px;
+            display: inline-block;
+        }
+
+        .strikethrough-red::after {
+            content: '';
+            position: absolute;
+            left: -2px;
+            right: -2px;
+            top: 55%;
+            height: 2px;
+            background-color: currentColor;
+            opacity: 0.8;
+            border-radius: 1px;
+            transform: translateY(-50%);
+        }
+
+        .old-price .currency {
+            font-size: 14px;
+            display: inline-block;
+            margin-right: 2px;
+        }
+
+        .old-price .amount {
+            font-size: 32px;
+            font-weight: 400; /* Removido negrito conforme solicitado */
+        }
+        .new-price { font-size: 48px; font-weight: 800; color: #ffffff; margin: 12px 0; font-family: 'Playfair Display', serif; }
+        .new-price .currency { font-size: 20px; vertical-align: middle; margin-right: 4px; color: #90a4ae; font-weight: 400; }
+        .new-price span.period { font-size: 22px; color: #90a4ae; font-weight: 400; }
+        .promo-pill { background: rgba(76, 175, 80, 0.15); color: #81c784; padding: 6px 16px; border-radius: 30px; font-size: 14px; font-weight: 700; display: inline-block; margin-bottom: 18px; border: 1px solid rgba(76, 175, 80, 0.25); text-transform: uppercase; }
+
+        .whatsapp-cta {
+            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+            color: white;
+            text-decoration: none;
+            padding: 18px 30px;
+            border-radius: 16px;
+            font-weight: 600; /* Menos grossa */
+            letter-spacing: 1.2px; /* Espaçamento maior entre letras */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 30px;
+            /* Removido brilho ao redor */
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-size: 19px;
+            text-transform: uppercase;
+        }
+
+        .whatsapp-cta:hover { transform: translateY(-5px) scale(1.02); }
+        
+        .footer { text-align: center; padding: 40px 20px; color: #666; font-size: 13px; }
+
+        /* Loader */
+        .content-loader { text-align: center; padding: 40px; color: #90caf9; font-style: italic; }
+
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        p, li, span, button { font-family: 'Outfit', sans-serif; }
+
+        /* Destaque para o Bloco do Curso Completo */
+        .course-highlight-card {
+            background: rgba(100, 181, 246, 0.04);
+            border: 1px solid rgba(100, 181, 246, 0.12);
+            border-radius: 20px;
+            padding: 24px;
+            margin-top: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-highlight-card .feature-item {
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .loop-video-wrapper { width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1); aspect-ratio: 16/9; background: #000; }
+        .loop-video-wrapper video { width: 100%; height: 100%; object-fit: cover; }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="mainContainer">
+        <!-- Placeholder para o conteúdo vindo do index.html -->
+        <div id="indexContent">
+            <div class="content-loader">Carregando conteúdo...</div>
+        </div>
+
+        <!-- Bloco de Detalhes (Sempre fixo nesta página) -->
+        <div class="details-card">
+            <h2 class="section-title" style="margin-bottom: 20px;">O que está incluso:</h2>
+            <ul class="feature-list">
+                <li class="feature-item">
+                    <span class="feature-icon">✅</span>
+                    <span>Aulas Individuais em videochamada</span>
+                </li>
+                <li class="feature-item">
+                    <span class="feature-icon">✅</span>
+                    <span>1h de duração de videochamada</span>
+                </li>
+                <li class="feature-item">
+                    <span class="feature-icon">✅</span>
+                    <span>1 vez por semana (horário fixo)</span>
+                </li>
+                <li class="feature-item">
+                    <span class="feature-icon">✅</span>
+                    <span>Aprenda sem sair de casa</span>
+                </li>
+                <li class="feature-item">
+                    <span class="feature-icon">✅</span>
+                    <div>
+                        Suporte no WhatsApp de segunda a sexta
+                        <span class="sub-text">Tire dúvidas no WhatsApp e também mande vídeos e áudios para análise</span>
+                    </div>
+                </li>
+                <li class="feature-item">
+                    <span class="feature-icon">✅</span>
+                    <span>Materiais de apoio online</span>
+                </li>
+            </ul>
+
+            <!-- Bloco do Curso Completo Unificado -->
+            <div class="course-highlight-card">
+                <div class="feature-item">
+                    <span class="feature-icon">✅</span>
+                    <span>Curso completo com 60 aulas para assistir a hora que quiser</span>
+                </div>
+
+                <div class="loop-video-wrapper">
+                    <video autoplay loop muted playsinline>
+                        <source src="videos/curso passando .mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <button class="btn-list" onclick="toggleLessons()">Ver lista de aulas do curso</button>
+                <div id="lessonsBlock" class="lessons-block">
+                    <div style="font-size: 14px; color: #cfd8dc; line-height: 1.7; white-space: pre-wrap; padding: 15px;" id="lessonsText"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="price-section">
+            <span class="old-price">Tudo isso de <span class="strikethrough-red"><span class="currency">R$</span> <span class="amount">150</span>,00</span></span>
+            <div style="font-size: 17px; color: #b0bec5; margin-bottom: 5px;">por apenas</div>
+            <div class="new-price"><span class="currency">R$</span>100 <span class="period">/mês</span></div>
+            <div class="promo-pill">Promoção de 3 meses</div>
+            <p style="font-size: 14px; color: #78909c; line-height: 1.5; margin-bottom: 25px;">Depois volta valor normal de R$ 150,00 por mês</p>
+
+            <a href="#" id="finalWhatsappBtn" class="whatsapp-cta">
+                <svg width="24" height="24" style="display:block; flex-shrink:0" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2ZM12.04 20.1C10.51 20.1 9 19.7 7.7 18.9L7.4 18.7L4.3 19.5L5.1 16.5L4.9 16.2C4.1 14.8 3.7 13.3 3.7 11.9C3.7 7.3 7.4 3.6 12 3.6C16.6 3.6 20.3 7.3 20.3 11.9C20.3 16.5 16.6 20.1 12.04 20.1ZM16.3 13.9C16.1 13.8 14.9 13.2 14.7 13.1C14.5 13 14.3 13 14.2 13.2C14 13.5 13.5 14 13.4 14.2C13.2 14.3 13.1 14.4 12.8 14.2C12.6 14.1 11.8 13.8 10.8 13C10.1 12.3 9.6 11.5 9.4 11.3C9.3 11.1 9.4 11 9.5 10.8C9.6 10.7 9.8 10.5 9.9 10.4C10 10.2 10 10.1 10.1 10C10.2 9.9 10.1 9.8 10.1 9.7C10.1 9.6 9.6 8.3 9.4 7.8C9.2 7.3 9 7.4 8.8 7.4C8.7 7.4 8.5 7.4 8.3 7.4C8.2 7.4 7.9 7.4 7.6 7.7C7.4 8 6.7 8.6 6.7 9.9C6.7 11.2 7.6 12.4 7.8 12.6C7.9 12.8 9.6 15.5 12.3 16.6C13 16.9 13.5 17.1 13.9 17.2C14.5 17.4 15.1 17.4 15.6 17.3C16.1 17.2 17.1 16.7 17.4 15.9C17.6 15.2 17.6 14.6 17.5 14.5C17.4 14.3 17.3 14.3 17.1 14.1L16.3 13.9Z"/></svg>
+                Garantir Minha Vaga
+            </a>
+        </div>
+
+        <footer class="footer">
+            Gabriel Almeida 2026 &copy; todos os direitos reservados
+        </footer>
+    </div>
+
+    <!-- Script de Dados e Lógica (Embutido para 100% de estabilidade) -->
+    <script>
+        const WAPP_NUMBER = "5595984224764";
+        const WAPP_MSG = "Vou entrar para as aulas individuais sim";
+        const wappUrl = `https://wa.me/${WAPP_NUMBER}?text=${encodeURIComponent(WAPP_MSG)}`;
+
+        document.getElementById('finalWhatsappBtn').href = wappUrl;
+
+        // Dados dos Depoimentos (Extraídos do Index para evitar problemas de fetch/CORS)
+        const testimonials = [
+            { name: "Daia", city: "Paraná", img: "images/Daia do paraná.webp", text: "Comecei totalmente do zero e já estou tocando várias músicas." },
+            { name: "Nazir", city: "Nova Serrana, Minas Gerais", img: "images/nazir.webp", text: "Me identifiquei muito com o professor Gabriel e agora estou tocando mais de quatro músicas." },
+            { name: "Mariana Arcanja", city: "João Pessoa, PB", img: "images/mariana de joão pessoa PB.webp", text: "Tinha meu violão há 30 anos e só agora com o professor Gabriel consegui realizar meu sonho. Já toco dezenas de músicas." },
+            { name: "Nilza", city: "Mato Grosso", img: "images/nilza do mato grosso.webp", text: "Desde adolescente era meu sonho tocar. Em menos de um mês com o professor Gabriel já estou tocando minha primeira música. Estou super feliz." },
+            { name: "Nadir", city: "Petrópolis, Rio de Janeiro", img: "images/nadir do rio de janeiro.webp", text: "Gabriel foi o melhor professor que eu já tive. Realmente me ajudou a entender. Já estou tocando dezenas de músicas." },
+            { name: "Bia Reis", city: "Almenara, Minas Gerais", img: "images/bia reis.webp", text: "Meu grande sonho era tocar violão. Gabriel me fez entender de verdade, agora já toco mais de 20 músicas." },
+            { name: "Elita", city: "Sinop, Mato Grosso", img: "images/elita de goiais.webp", text: "Em dois meses com o Gabriel aprendi a tocar músicas inteiras. Super recomendo." },
+            { name: "Nina Miranda", city: "Araxá, Minas Gerais", img: "images/nina de minas gerais.webp", text: "Com poucas aulas estou aprendendo mais rápido coisas que tentei por anos, aprendi a tocar de verdade." },
+            { name: "Denilson Nogueira", city: "Teresina, Piauí", img: "images/denilson do piauí.webp", text: "Minha maior dificuldade era a troca de acordes. Um mês depois eu consegui tocar minha primeira música." },
+            { name: "Sidnei", city: "São Paulo", img: "images/sidnei.webp", text: "Estou superando a mim mesmo com o aprendizado de violão. Graças ao professor Gabriel já consigo tocar bastantes músicas. Gratidão." },
+            { name: "Carlos", city: "Paraná", img: "images/carlos.webp", text: "Tinha muita dificuldade de acertar a altura da voz e o professor Gabriel está me ajudando, já estou muito feliz com o resultado." },
+            { name: "Cleide", city: "Sergipe", img: "images/cleide.webp", text: "Comecei praticamente do zero e agora já estou tocando muitas músicas evangélicas." },
+            { name: "Ivo", city: "Paraná", img: "images/ivo.webp", text: "Conheci o professor Gabriel no YouTube, é um professor muito paciente, já aprendi a tocar muitas músicas." },
+            { name: "Amélia", city: "São Paulo", img: "images/amelia.webp", text: "Tenho 80 anos e estou aprendendo a tocar com o professor Gabriel, já estou tocando minha segunda música" }
+        ];
+
+        const videoTestimonials = [
+            { name: 'Nazir', location: 'Nova Serrana, Minas Gerais', src: 'videos/01 - Nazir.mp4', poster: 'images/nazir.webp' },
+            { name: 'Denilson Nogueira', location: 'Teresina, Piauí', src: 'videos/02 - Denilson.mp4', poster: 'images/denilson do piauí.webp' },
+            { name: 'Josineide', location: 'Estado de São Paulo', src: 'videos/03 - Josineide.mp4', poster: 'images/josineide.webp' },
+            { name: 'Nina Miranda', location: 'Araxá, Minas Gerais', src: 'videos/04 - Nina Miranda.mp4', poster: 'images/nina de minas gerais.webp' },
+            { name: 'Elita', location: 'Sinop, Mato Grosso', src: 'videos/05 - Elita.mp4', poster: 'images/elita de goiais.webp' },
+            { name: 'Neuda', location: 'Ceará', src: 'videos/06 - Neuda.mp4', poster: 'images/neuda.webp' },
+            { name: 'Mariana Arcanja', location: 'João Pessoa, PB', src: 'videos/07 - Mariana.mp4', poster: 'images/mariana de joão pessoa PB.webp' },
+            { name: 'Bia Reis', location: 'Almenara, Minas Gerais', src: 'videos/08 - Bia.mp4', poster: 'images/bia reis.webp' },
+            { name: 'Paulo', location: 'Espírito Santo', src: 'videos/09 - Paulo.mp4', poster: 'images/paulo.webp' },
+            { name: 'Daia', location: 'Paraná', src: 'videos/10 - Daia.mp4', poster: 'images/Daia do paraná.webp' },
+            { name: 'Nadir', location: 'Petrópolis, Rio de Janeiro', src: 'videos/11 - Nadir.mp4', poster: 'images/nadir do rio de janeiro.webp' },
+            { name: 'Carlos', location: 'Paraná', src: 'videos/12 - Carlos.mp4', poster: 'images/carlos.webp' },
+            { name: 'Nilza', location: 'Mato Grosso', src: 'videos/13 - Nilza.mp4', poster: 'images/nilza do mato grosso.webp' },
+            { name: 'Ivo Ferreira', location: 'Paraná', src: 'videos/14 - Ivo Ferreira.mp4', poster: 'images/ivo.webp' },
+            { name: 'Cleide', location: 'Sergipe', src: 'videos/15 - Cleide.mp4', poster: 'images/cleide.webp' },
+            { name: 'Antônia', location: 'Ceará', src: 'videos/16 - Depoimento Aluna Antônia_editado.mp4', poster: 'images/antonia.webp' },
+            { name: 'Amélia', location: 'São Paulo', src: 'videos/17 - Tocando violão aos 80 anos Depoimento Aluna Amélia_editado.mp4', poster: 'images/amelia.webp' }
+        ];
+
+        // --- LÓGICA DO CARROSSEL ---
+        let currentSlide = 0;
+        let slideInterval;
+
+        function initCarousel() {
+            const track = document.getElementById('carouselTrack');
+            const dots = document.getElementById('carouselDots');
+            if (!track || !dots) return;
+
+            track.innerHTML = '';
+            dots.innerHTML = '';
+
+            testimonials.forEach((t, index) => {
+                const item = document.createElement('div');
+                item.className = 'carousel-item';
+                item.innerHTML = `<img src="${t.img}" width="80" height="80" onerror="this.src='images/img.webp'" alt="${t.name}">`;
+                track.appendChild(item);
+
+                const dot = document.createElement('div');
+                dot.className = 'carousel-dot';
+                dot.onclick = () => { updateCarousel(index); clearInterval(slideInterval); startAutoSlide(); };
+                dots.appendChild(dot);
+            });
+
+            updateCarousel(0);
+            startAutoSlide();
+        }
+
+        function updateCarousel(index) {
+            if (index < 0) index = testimonials.length - 1;
+            if (index >= testimonials.length) index = 0;
+            currentSlide = index;
+
+            const items = document.querySelectorAll('.carousel-item');
+            const dots = document.querySelectorAll('.carousel-dot');
+            items.forEach((item, i) => {
+                item.className = 'carousel-item ' + (i === currentSlide ? 'active' : i === currentSlide - 1 ? 'prev' : i === currentSlide + 1 ? 'next' : '');
+            });
+            dots.forEach((dot, i) => dot.classList.toggle('active', i === currentSlide));
+
+            document.getElementById('carouselName').innerText = testimonials[currentSlide].name;
+            document.getElementById('carouselCity').innerText = testimonials[currentSlide].city;
+            document.getElementById('carouselText').innerText = '"' + testimonials[currentSlide].text + '"';
+        }
+
+        function startAutoSlide() { slideInterval = setInterval(() => updateCarousel(currentSlide + 1), 3000); }
+
+        // --- LÓGICA DE VÍDEOS ---
+        function loadVideo(containerId, src, poster) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            container.innerHTML = `<video controls autoplay style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;"><source src="${src}" type="video/mp4"></video>`;
+        }
+
+        function setupFeaturedVideo() {
+            const featured = videoTestimonials[0];
+            const container = document.getElementById('featuredVideoContainer');
+            if (!container || !featured) return;
+            document.getElementById('featuredVideoName').innerText = featured.name;
+            document.getElementById('featuredVideoCity').innerText = featured.location;
+            const posterImg = featured.poster || 'images/img.webp';
+            container.innerHTML = `
+                <div class="video-placeholder" onclick="loadVideo('featuredVideoContainer', '${featured.src}', '${posterImg}')" style="background-image: url('${posterImg}')">
+                    <div class="play-button-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+                </div>`;
+        }
+
+        // --- LÓGICA DE MAIS VÍDEOS ---
+        let videosVisible = false;
+        function toggleVideos() {
+            const extraContainer = document.getElementById('extraVideosContainer');
+            const btn = document.querySelector('.btn-blue-outline');
+            if (!extraContainer || !btn) return;
+            
+            videosVisible = !videosVisible;
+            if (videosVisible) {
+                renderExtraVideos();
+                extraContainer.style.display = 'grid';
+                btn.innerText = 'Ver menos depoimentos';
+            } else {
+                extraContainer.style.display = 'none';
+                btn.innerText = 'Ver depoimentos em vídeo';
+            }
+        }
+
+        function renderExtraVideos() {
+            const extraContainer = document.getElementById('extraVideosContainer');
+            if (!extraContainer) return;
+            extraContainer.innerHTML = '';
+            // Pular o primeiro que já é o destaque
+            videoTestimonials.slice(1).forEach((v, i) => {
+                const card = document.createElement('div');
+                card.className = 'video-card';
+                card.style.marginTop = '20px';
+                card.innerHTML = `
+                    <div>
+                        <h4 class="video-person-name">${v.name}</h4>
+                        <p class="video-person-city">${v.location}</p>
+                    </div>
+                    <div class="video-container" id="video-extra-${i}">
+                        <div class="video-placeholder" onclick="loadVideo('video-extra-${i}', '${v.src}', '${v.poster}')" style="background-image: url('${v.poster}')">
+                            <div class="play-button-overlay"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+                        </div>
+                    </div>
+                `;
+                extraContainer.appendChild(card);
+            });
+        }
+
+        // --- PUXAR LISTA DE AULAS DO TXT ---
+        async function fetchLessons() {
+            try {
+                const response = await fetch('lista_aulas.txt');
+                const text = await response.text();
+                document.getElementById('lessonsText').innerText = text;
+            } catch (e) {
+                console.error(e);
+                document.getElementById('lessonsText').innerText = "Erro ao carregar a lista de aulas.";
+            }
+        }
+
+        function toggleLessons() {
+            const block = document.getElementById('lessonsBlock');
+            block.classList.toggle('open');
+            document.querySelector('.btn-list').innerText = block.classList.contains('open') ? 'Fechar lista de aulas' : 'Ver lista de aulas do curso';
+        }
+
+        // --- PUXAR CONTEÚDO RESTANTE ---
+        async function fetchIndexContent() {
+            try {
+                const response = await fetch('index.html');
+                const html = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+
+                const indexContentDiv = document.getElementById('indexContent');
+                indexContentDiv.innerHTML = '';
+
+                const step0 = doc.getElementById('step0');
+                if (step0) {
+                    const hero = step0.querySelector('.hero-promise')?.outerHTML || '';
+                    const glowWrapper = step0.querySelector('.image-glow-wrapper');
+                    const imgTag = glowWrapper ? glowWrapper.querySelector('img')?.outerHTML : '';
+                    const badges = Array.from(step0.querySelectorAll('.exclusive-badge')).map(el => el.outerHTML).join('') || '';
+                    const titles = Array.from(step0.querySelectorAll('h1')).map(el => el.outerHTML).join('') || '';
+                    
+                    indexContentDiv.innerHTML += `
+                        <div style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; margin-bottom: 20px;">
+                            ${hero}
+                            ${imgTag ? `<div class="image-glow-wrapper">${imgTag}</div>` : ''}
+                            <div style="display: flex; flex-direction: column; gap: 10px;">${badges}</div>
+                            <div style="margin-top: 10px;">${titles}</div>
+                        </div>
+                    `;
+
+                    // Injetar containers de depoimentos se não existirem
+                    const testimonyBase = doc.querySelector('.testimonials-section')?.cloneNode(true);
+                    if (testimonyBase) {
+                        // Garantir que o botão de ver mais vídeos funcione
+                        const seeMoreBtn = testimonyBase.querySelector('.btn-blue-outline');
+                        if (seeMoreBtn) {
+                            seeMoreBtn.setAttribute('onclick', 'toggleVideos()');
+                            seeMoreBtn.id = 'seeMoreVideosBtn';
+                        }
+                        // Criar container para os vídeos extras
+                        const extraContainer = document.createElement('div');
+                        extraContainer.id = 'extraVideosContainer';
+                        extraContainer.style.display = 'none';
+                        extraContainer.style.flexDirection = 'column';
+                        extraContainer.style.width = '100%';
+                        testimonyBase.appendChild(extraContainer);
+                        
+                        indexContentDiv.appendChild(testimonyBase);
+                    }
+                }
+
+                // Inicializar componentes
+                initCarousel();
+                setupFeaturedVideo();
+                fetchLessons();
+
+            } catch (e) {
+                console.error("Erro no fetch:", e);
+                // Fallback se o fetch falhar (ex: file://)
+                document.getElementById('indexContent').innerHTML = '<p style="color:red">Para ver o conteúdo completo do index, use um servidor local ou abra pelo site online.</p>';
+            }
+        }
+
+        fetchIndexContent();
+    </script>
+</body>
+
+</html>
